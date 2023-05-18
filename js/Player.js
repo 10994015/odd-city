@@ -39,7 +39,7 @@ class Player{
                 right:createPlayer('./images/player/spriteRunRight.png'),
                 left:createPlayer('./images/player/spriteRunLeft.png'),
                 cropWidth:225,
-                width:127.875*1
+                width:155
             }
         }
         this.currentSprite = this.sprites.stand.right

@@ -194,7 +194,7 @@ const occupys = {
     chk: new Shared({x:canvas.width/2 - (112/2)/2 + 300, y:canvas.height/2 - (68/2)/2 + 20, w:112/2, h:68/2, image: createImage('./images/buttons/chk.png'), isEnlarge:false, multiple:1, name:'chk', isShow:false ,}),
 
 
-    end: new Shared({x:canvas.width/2 - (2079/5)/2 , y:canvas.height/2 - (2123/5)/2  , w:398/1, h:232/1, image: createImage('./images/occupys/goodend.png'), isEnlarge:false, multiple:1, name:'end', isShow:false,}),
+    end: new Shared({x:canvas.width/2 - (2079/5)/2 , y:canvas.height/2 - (2123/5)/2  , w:2079/5, h:2132/5, image: createImage('./images/occupys/goodend.png'), isEnlarge:false, multiple:1, name:'end', isShow:false,}),
 
 }
 
@@ -265,7 +265,7 @@ const hoards = {
     chk: new Shared({x:canvas.width/2 - (112/2)/2 + 300, y:canvas.height/2 - (68/2)/2 + 20, w:112/2, h:68/2, image: createImage('./images/buttons/chk.png'), isEnlarge:false, multiple:1, name:'chk', isShow:false ,}),
     chk2: new Shared({x:canvas.width/2 - (112/2)/2 + 110, y:canvas.height/2 - (68/2)/2 + 20, w:112/2, h:68/2, image: createImage('./images/buttons/chk.png'), isEnlarge:false, multiple:1, name:'chk2', isShow:false ,}),
 
-    end: new Shared({x:canvas.width/2 - (2079/5)/2 , y:canvas.height/2 - (2123/5)/2  , w:398/1, h:232/1, image: createImage('./images/hoards/goodend.png'), isEnlarge:false, multiple:1, name:'end', isShow:false,}),
+    end: new Shared({x:canvas.width/2 - (2079/5)/2 , y:canvas.height/2 - (2123/5)/2  , w:2079/5, h:2123/5, image: createImage('./images/hoards/goodend.png'), isEnlarge:false, multiple:1, name:'end', isShow:false,}),
 }
 const networks = {
     computer: new Shared({x:940, y:108, w:751/4.2, h:418/4.2, image: createImage('./images/network/computer.png'), name:'computer', isShow:true, isEnlarge:false, multiple:1}),
@@ -311,7 +311,7 @@ const networks = {
 
     chk: new Shared({x:canvas.width/2 - (112/2)/2 + 300, y:canvas.height/2 - (68/2)/2 + 20, w:112/2, h:68/2, image: createImage('./images/buttons/chk.png'), isEnlarge:false, multiple:1, name:'chk', isShow:false ,}),
 
-    end: new Shared({x:canvas.width/2 - (2079/5)/2 , y:canvas.height/2 - (2123/5)/2  , w:398/1, h:232/1, image: createImage('./images/network/goodend.png'), isEnlarge:false, multiple:1, name:'end', isShow:false,}),
+    end: new Shared({x:canvas.width/2 - (2079/5)/2 , y:canvas.height/2 - (2123/5)/2  , w:2079/5, h:2123/5, image: createImage('./images/network/goodend.png'), isEnlarge:false, multiple:1, name:'end', isShow:false,}),
 
 }
 const noisys = {
@@ -373,7 +373,7 @@ const noisys = {
     // new Shared({x:playerTalkX-(2378/4.5)-25, y:playerTalkXY-630/4.5, w:2378/4.5, h:630/4.5, image: createImage('./images/network/talk/2.png'), isTalk:true, isEnlarge:false, multiple:1.02, name:'2', isShow:false,}),
     A: new Shared({x:canvas.width/2 - (1485/4)/2 , y:canvas.height/2 - (484/4)/2  , w:1485/4, h:484/4, image: createImage('./images/noisy/talk/A.png'), isEnlarge:false, multiple:1, name:'A', isShow:false,}),
     B: new Shared({x:canvas.width/2 - (1485/4)/2 , y:canvas.height/2 - (484/4)/2  , w:1485/4, h:484/4, image: createImage('./images/noisy/talk/B.png'), isEnlarge:false, multiple:1, name:'B', isShow:false,}),
-    end: new Shared({x:canvas.width/2 - (2079/5)/2 , y:canvas.height/2 - (2123/5)/2  , w:398/1, h:232/1, image: createImage('./images/noisy/goodend.png'), isEnlarge:false, multiple:1, name:'end', isShow:false,}),
+    end: new Shared({x:canvas.width/2 - (2079/5)/2 , y:canvas.height/2 - (2123/5)/2  , w:2079/5, h:2132/5, image: createImage('./images/noisy/goodend.png'), isEnlarge:false, multiple:1, name:'end', isShow:false,}),
 }
 const delays = {
     count: new Shared({x:150, y:670, w:300/3.5, h:137/3.5, image: createImage('./images/delays/talk/0-4.png'), name:'count', multiple:1, isEnlarge:false, isShow:false}),
