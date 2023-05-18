@@ -22,7 +22,7 @@ class Player{
         this.image = createPlayer('./images/player/spriteStandRight.png');
         this.move = false
         this.width = 66*1
-        this.height = 250*1
+        this.height = 260*1
         this.sides = {
             bottom: this.position.y + this.height
         }
