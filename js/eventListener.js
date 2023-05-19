@@ -10,8 +10,12 @@ window.addEventListener("keydown", ({keyCode})=>{
     if(!isStart) return
     if(startNav) return
     if(!player.move) return
+    console.log(keyCode);
     switch (keyCode){
         case 87:
+            if(player.velocity.y ===0 ) player.velocity.y = -20
+            break;
+        case 38:
             if(player.velocity.y ===0 ) player.velocity.y = -20
             break;
         case 68:
@@ -23,7 +27,25 @@ window.addEventListener("keydown", ({keyCode})=>{
                 audioRunning.play()
             }
             break;
+        case 39:
+            if(!isRoomOpen){
+                console.log(scrollOffset);
+                keys.right.pressed = true
+                lastKey = 'right'
+                audioRunning.loop = true
+                audioRunning.play()
+            }
+            break;
         case 65:
+            if(!isRoomOpen){
+                console.log(scrollOffset);
+                keys.left.pressed = true
+                lastKey = 'left'
+                audioRunning.loop = true
+                audioRunning.play()
+            }
+            break;
+        case 37:
             if(!isRoomOpen){
                 console.log(scrollOffset);
                 keys.left.pressed = true
@@ -45,18 +67,28 @@ window.addEventListener("keyup", ({keyCode})=>{
             audioRunning.pause()
             audioRunning.currentTime = 0
             break;
+        case 39:
+            keys.right.pressed = false
+            audioRunning.pause()
+            audioRunning.currentTime = 0
+            break;
         case 65:
             keys.left.pressed = false
             audioRunning.pause()
             audioRunning.currentTime = 0
             break;
+        case 37:
+            keys.left.pressed = false
+            audioRunning.pause()
+            audioRunning.currentTime = 0
+            break;
         case 27:
-            if(isRoomOpen){
-                for (let key in roomOpen) {
-                    roomOpen[key] = false;
-                  }
-                isRoomOpen = false
-            }
+            // if(isRoomOpen){
+            //     for (let key in roomOpen) {
+            //         roomOpen[key] = false;
+            //       }
+            //     isRoomOpen = false
+            // }
     }
 })
 
@@ -734,6 +766,8 @@ const roadObject = {
 
 }
 canvas.addEventListener('click', (e)=>{
+    console.log('openPhone=>', openPhone);
+    console.log('isStart=>', isStart);
     let rect = canvas.getBoundingClientRect();
     let x = e.clientX - rect.left;
     let y = e.clientY - rect.top;
@@ -812,8 +846,12 @@ canvas.addEventListener('click', (e)=>{
     }
     if(!isStart) return
     if(openPhone) {
-        if(x>=buttons.closePhone.position.x && x<=buttons.closePhone.position.x + buttons.closePhone.width && y>=buttons.closePhone.position.y && y<=buttons.closePhone.position.y+buttons.closePhone.height){
-            openPhone = false
+        if(!startNav){
+            if(x>=buttons.closePhone.position.x && x<=buttons.closePhone.position.x + buttons.closePhone.width && y>=buttons.closePhone.position.y && y<=buttons.closePhone.position.y+buttons.closePhone.height){
+                setTimeout(()=>{
+                    openPhone = false
+                }, 100)
+            }
         }
         return
     }
@@ -1217,7 +1255,7 @@ canvas.addEventListener('click', (e)=>{
             }
             buttons.close.enlarge = true
             globalClick = false
-            starts.start05 = false
+            starts.start05.show = false
 
             setTimeout(()=>{
                 if(!isRoomOpen) return
@@ -3622,11 +3660,16 @@ canvas.addEventListener('click', (e)=>{
         
     }
     if(!openPhone){
-        if(x>=phone.position.x && x<=phone.position.x + phone.width && y>=phone.position.y && y<=phone.position.y+phone.height){
-            console.log('ok');
-            openPhone = true
-            buttons.closePhone.enlarge = true
+        if(!startNav){
+            if(!isTeaching){
+                if(x>=phone.position.x && x<=phone.position.x + phone.width && y>=phone.position.y && y<=phone.position.y+phone.height){
+                    openPhone = true
+                    buttons.closePhone.enlarge = true
+                }
+            }
+            
         }
+        
     }
     interactions.forEach(interaction=>{
         let bool = x >= interaction.position.x && x <= interaction.position.x + interaction.width && y>=interaction.position.y && y<=interaction.position.y + interaction.height
@@ -3726,8 +3769,7 @@ canvas.addEventListener('click', (e)=>{
     }
     if(startNav){
         if(startNav && globalClick && starts.start02.show ){
-            let chk = starts.chk2
-            let bool = x >= chk.position.x && x <= chk.position.x + chk.width && y>=chk.position.y && y<=chk.position.y + chk.height
+            let bool = x >= starts.chk2.position.x && x <= starts.chk2.position.x + starts.chk2.width && y>=starts.chk2.position.y && y<=starts.chk2.position.y + starts.chk2.height
             if(bool){
                 clickVedioPlay('btn')
                 globalClick = false

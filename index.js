@@ -58,7 +58,7 @@ const backgruond = new Backgruond({
     },
     image :createImage('./images/bg.png'),
 })
-const phone = new Interaction({x:50, y:25, w:308/4.5, h:492/4.5, name:'phone',image: createImage('./images/buttons/phone.png'), multiple:1.05, isShow:true, isEnlarge:false})
+const phone = new Interaction({x:1350, y:25, w:308/4.5, h:492/4.5, name:'phone',image: createImage('./images/buttons/phone.png'), multiple:1.05, isShow:true, isEnlarge:false})
 let openPhone = false
 const interactions = [
     new Interaction({x:2973, y:481, w:147, h:218, name:'cool', isShow:false}),
@@ -156,8 +156,8 @@ const cools = {
 
     end: new Shared({x:canvas.width/2 - (2079/5)/2 , y:canvas.height/2 - (2123/5)/2  , w:2079/5, h:2123/5, image: createImage('./images/cool/goodend.png'), isEnlarge:false, multiple:1, name:'end', isShow:false,}),
 
-    talk005: new Shared({x:canvas.width/2 - (3149/4.5)/2, y:canvas.height/2 - (484/4.5) - 100, w:2378/4.8, h:639/4.8, image: createImage('./images/cool/talk/005.png'), isTalk:true, isEnlarge:false, multiple:1.02, name:'005', isShow:false,}),
-    talk006: new Shared({x:canvas.width/2 - (3149/4.5)/2 , y:canvas.height/2 - (484/4.5) - 100, w:2378/4.8, h:639/4.8, image: createImage('./images/cool/talk/006.png'), isTalk:true, isEnlarge:false, multiple:1.02, name:'006', isShow:false,}),
+    talk005: new Shared({x:canvas.width/2 - (3149/4.5)/2 - 200, y:canvas.height/2 - (484/4.5) - 200, w:2378/4.8, h:639/4.8, image: createImage('./images/cool/talk/005.png'), isTalk:true, isEnlarge:false, multiple:1.02, name:'005', isShow:false,}),
+    talk006: new Shared({x:canvas.width/2 - (3149/4.5)/2 - 200, y:canvas.height/2 - (484/4.5) - 200, w:2378/4.8, h:639/4.8, image: createImage('./images/cool/talk/006.png'), isTalk:true, isEnlarge:false, multiple:1.02, name:'006', isShow:false,}),
     talk06: new Shared({x:canvas.width -2378/4.8 - 80  , y:80, w:2378/4.8, h:639/4.8, image: createImage('./images/cool/talk/06.png'), isTalk:true, isEnlarge:false, multiple:1.02, name:'06', isShow:false,}),
 
     chk: new Shared({x:canvas.width/2 - (112/2)/2 + 300, y:canvas.height/2 - (68/2)/2 + 20, w:112/2, h:68/2, image: createImage('./images/buttons/chk.png'), isEnlarge:false, multiple:1, name:'chk', isShow:false ,}),
