@@ -3741,6 +3741,8 @@ canvas.addEventListener('click', (e)=>{
                 roadObject.talk2B.enlarge = true
                 roadObject.talk2Chk = true
             }, 1500)
+        }else if(interaction.name === 'mailbox'){
+            window.open('https://forms.gle/WU1ZxSE2uU6QvYvU9')
         }
         
     })

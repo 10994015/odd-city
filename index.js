@@ -70,6 +70,11 @@ const interactions = [
     new Interaction({x:6430, y:490, w:310, h:225, name:'road', isShow:false}),
 
 
+
+
+    new Interaction({x:3898, y:564, w:532/3, h:149, name:'mailbox', isShow:false, isRoom:false}),
+
+
     // new Interaction({x:1320, y:50, w:308/4.5, h:492/4.5, name:'phone',image: createImage('./images/buttons/phone.png'), multiple:1.05, isShow:true, isEnlarge:false, isScroll:false})
 ]
 const talks = [
@@ -83,6 +88,8 @@ const talks = [
 ]
 const outSideItems = [
     new Interaction({x:6380 , y:460, w:279/3.5, h:871/3.5, name:'roadpeople',image: createImage('./images/roads/people1.png'), isEnlarge:false, isShow:true}),
+    new Interaction({x:2973 - 52 , y:481 -9, w:710/1, h:230/1,  name:'cool',image: createImage('./images/outside/cool.png'), isEnlarge:false, isShow:true, frmaeNum:3}),
+    new Interaction({x:3898 , y:564, w:532/1, h:149/1,  name:'mailbox',image: createImage('./images/outside/mailbox.png'), isEnlarge:false, isShow:true, frmaeNum:3}),
 ]
 const dynamics = [
     
@@ -689,7 +696,7 @@ function animate(){
     })
     outSideItems.forEach(item=>{
         if(item.show===false) return
-        item.draw()
+        item.updata()
     })
     talks.forEach(talk=>{
         if(talk.show) talk.draw()

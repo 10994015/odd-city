@@ -18,7 +18,7 @@ class Backgruond{
 }
 
 class Interaction {
-    constructor({x, y, w, h, name, image=null, multiple=1, isShow=true, isEnlarge=false, isScroll=true}){
+    constructor({x, y, w, h, name, image=null, multiple=1, isShow=true, isEnlarge=false, isScroll=true, frmaeNum=1,isRoom=true}){
         this.position = {
            x, y
         }
@@ -34,6 +34,11 @@ class Interaction {
         this.show = isShow
         this.enlarge = isEnlarge
         this.scroll = isScroll
+        this.count = 0
+        this.frmaeNum = frmaeNum
+        this.frames = 0
+        this.currentCropWidth = w/frmaeNum
+        this.isRoom = isRoom
         if(this.image !== null){
             this.image.onload = ()=>{
                 this.loaded = true
@@ -46,12 +51,24 @@ class Interaction {
             c.fillRect(this.position.x, this.position.y, this.width, this.height)
         }else{
             if(!this.loaded) return
-            c.drawImage(this.image, this.position.x, this.position.y, this.width, this.height)
+            if(this.frmaeNum > 1){
+                c.drawImage(this.image, this.currentCropWidth*this.frames, 0, this.currentCropWidth, this.height, this.position.x, this.position.y, this.width/this.frmaeNum, this.height)
+            }else{
+                c.drawImage(this.image, this.position.x, this.position.y, this.width, this.height)
+            }
+        }
+    }
+    updata(){
+        this.draw();
+        this.count++
+        if(this.count%30 === 0){
+            this.frames++;
+        }
+        if(this.frames >= this.frmaeNum ){
+            this.frames = 0
         }
     }
 }
-
-
 class Room{
     constructor({w=canvas.height *0.8 * 1.844,h=canvas.height *0.8,image}){
         this.width = w
@@ -71,7 +88,6 @@ class Room{
         c.drawImage(this.image, this.position.x, this.position.y, this.width, this.height)
     }
 }
-
 class Dynamic{
     constructor({x, y, w, h, image}){
         this.width = w
@@ -90,7 +106,6 @@ class Dynamic{
         c.drawImage(this.image, this.position.x, this.position.y, this.width, this.height)
     }
 }
-
 class Bus{
     constructor({x, y, w, h, image}){
         this.width = w
@@ -130,7 +145,6 @@ class Bus{
         this.draw();
     }
 }
-
 class Shared{
     constructor({x, y, w, h, image, isPeople=false, isEnlarge=false, isShow=true, isTalk=false,multiple=1.1, name=null, text="", color="#000", isTypewriter=false,frmaeNum=1}){
         this.oldPosition = {
