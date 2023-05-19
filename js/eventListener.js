@@ -848,9 +848,7 @@ canvas.addEventListener('click', (e)=>{
     if(openPhone) {
         if(!startNav){
             if(x>=buttons.closePhone.position.x && x<=buttons.closePhone.position.x + buttons.closePhone.width && y>=buttons.closePhone.position.y && y<=buttons.closePhone.position.y+buttons.closePhone.height){
-                setTimeout(()=>{
-                    openPhone = false
-                }, 100)
+                openPhone = false
             }
         }
         return
@@ -3662,9 +3660,11 @@ canvas.addEventListener('click', (e)=>{
     if(!openPhone){
         if(!startNav){
             if(!isTeaching){
-                if(x>=phone.position.x && x<=phone.position.x + phone.width && y>=phone.position.y && y<=phone.position.y+phone.height){
-                    openPhone = true
-                    buttons.closePhone.enlarge = true
+                if(!isRoomOpen){
+                    if(x>=phone.position.x && x<=phone.position.x + phone.width && y>=phone.position.y && y<=phone.position.y+phone.height){
+                        openPhone = true
+                        buttons.closePhone.enlarge = true
+                    }
                 }
             }
             
