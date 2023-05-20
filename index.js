@@ -39,6 +39,7 @@ const getCG = {
     delay:[],
     road:[],
 }
+const CGArr = [];
 let occupyInteractiveBtn = false
 
 let scrollOffset =-2400
@@ -68,8 +69,6 @@ const interactions = [
     new Interaction({x:4825, y:590, w:60, h:60, name:'noisy',image: createImage('./images/buttons/in2f.png'),  isShow:false}),
     new Interaction({x:4955, y:530, w:175, h:195, name:'delay', isShow:false}),
     new Interaction({x:6430, y:490, w:310, h:225, name:'road', isShow:false}),
-
-
 
 
     new Interaction({x:3898, y:564, w:532/3, h:149, name:'mailbox', isShow:false, isRoom:false}),
@@ -527,6 +526,12 @@ const buttons = {
 
 const phones = {
     badgeBtn: new Shared({x:535, y:615,  w:743/2, h:255/2, image: createImage('./images/phone/badgeBtn.png'), name:'badgeBtn', multiple:1.01, isEnlarge:true, isShow:true}),
+    badge1: new Shared({x:550, y:200, w:695/2, h:282/2, image: createImage('./images/phone/badge/1.png'),name:'badge1', isEnlarge:false, multiple:1, isShow:false}),
+    badge2: new Shared({x:550, y:200 + 282/2 + 15, w:695/2, h:282/2, image: createImage('./images/phone/badge/1.png'),name:'badge2', isEnlarge:false, multiple:1, isShow:false}),
+    badge3: new Shared({x:550, y:200 + 282 + 30, w:695/2, h:282/2, image: createImage('./images/phone/badge/1.png'),name:'badge3', isEnlarge:false, multiple:1, isShow:false}),
+    badgeLeft: new Shared({x:canvas.width/2 - (69/2)/2 -50, y:200 + 282 + 190, w:69/2, h:86/2, image: createImage('./images/phone/badge/left.png'),name:'badgeLeft', isEnlarge:false, multiple:1, isShow:false}),
+    badgeRight: new Shared({x:canvas.width/2 - (69/2)/2 + 50, y:200 + 282 + 190, w:69/2, h:86/2, image: createImage('./images/phone/badge/right.png'),name:'badgeRight', isEnlarge:false, multiple:1, isShow:false}),
+    badgeClose: new Shared({x:canvas.width/2 - (69/2)/2 - 150, y:100, w:116/2, h:116/2, image: createImage('./images/phone/badge/close.png'),name:'badgeClose', isEnlarge:false, multiple:1, isShow:false}),
 
 }
 let isRoomOpen = false;
@@ -622,7 +627,7 @@ function startFn(){
                 bus.divisor = 15
             }
         }
-    }, 20)
+    }, 0)
 }
 
 let busPos = 1.5
@@ -697,6 +702,7 @@ function animate(){
     outSideItems.forEach(item=>{
         if(item.show===false) return
         item.updata()
+        
     })
     talks.forEach(talk=>{
         if(talk.show) talk.draw()

@@ -10,7 +10,6 @@ window.addEventListener("keydown", ({keyCode})=>{
     if(!isStart) return
     if(startNav) return
     if(!player.move) return
-    console.log(keyCode);
     switch (keyCode){
         case 87:
             if(player.velocity.y ===0 ) player.velocity.y = -20
@@ -20,7 +19,6 @@ window.addEventListener("keydown", ({keyCode})=>{
             break;
         case 68:
             if(!isRoomOpen){
-                console.log(scrollOffset);
                 keys.right.pressed = true
                 lastKey = 'right'
                 audioRunning.loop = true
@@ -29,7 +27,6 @@ window.addEventListener("keydown", ({keyCode})=>{
             break;
         case 39:
             if(!isRoomOpen){
-                console.log(scrollOffset);
                 keys.right.pressed = true
                 lastKey = 'right'
                 audioRunning.loop = true
@@ -38,7 +35,6 @@ window.addEventListener("keydown", ({keyCode})=>{
             break;
         case 65:
             if(!isRoomOpen){
-                console.log(scrollOffset);
                 keys.left.pressed = true
                 lastKey = 'left'
                 audioRunning.loop = true
@@ -47,7 +43,6 @@ window.addEventListener("keydown", ({keyCode})=>{
             break;
         case 37:
             if(!isRoomOpen){
-                console.log(scrollOffset);
                 keys.left.pressed = true
                 lastKey = 'left'
                 audioRunning.loop = true
@@ -750,8 +745,6 @@ const delayObject = {
     chkCGchk: false,
     end: delays.end,
 }
-
-
 const roadObject = {
     people: roads.people,
     response1: roads.response1,
@@ -763,11 +756,17 @@ const roadObject = {
     talk5: roads.talk5,
     talk5Chk: false,
     chk: roads.chk,
-
+}
+const phoneObject = {
+    badgeBtn: phones.badgeBtn,
+    badge1: phones.badge1,
+    badge2: phones.badge2,
+    badge3: phones.badge3,
+    badgeRight: phones.badgeRight,
+    badgeLeft: phones.badgeLeft,
+    badgeClose: phones.badgeClose,
 }
 canvas.addEventListener('click', (e)=>{
-    console.log('openPhone=>', openPhone);
-    console.log('isStart=>', isStart);
     let rect = canvas.getBoundingClientRect();
     let x = e.clientX - rect.left;
     let y = e.clientY - rect.top;
@@ -849,8 +848,64 @@ canvas.addEventListener('click', (e)=>{
         if(!startNav){
             if(x>=buttons.closePhone.position.x && x<=buttons.closePhone.position.x + buttons.closePhone.width && y>=buttons.closePhone.position.y && y<=buttons.closePhone.position.y+buttons.closePhone.height){
                 openPhone = false
+                phoneui.image.src = './images/phone/bg.png'
+                Object.keys(phoneObject).forEach(item=>{
+                    if(item === 'badgeBtn'){
+                        phoneObject[item].show = true
+                        phoneObject[item].enlarge = true
+                    }else{
+                        phoneObject[item].show = false
+                        phoneObject[item].enlarge = false
+                    }
+                })
             }
         }
+        if(phoneObject.badgeBtn.enlarge){
+            if(x>=phoneObject.badgeBtn.position.x && x<=phoneObject.badgeBtn.position.x + phoneObject.badgeBtn.width && y>=phoneObject.badgeBtn.position.y && y<=phoneObject.badgeBtn.position.y+phoneObject.badgeBtn.height){
+                phoneui.image.src = "./images/phone/badge/bg.png"
+                phoneObject.badgeBtn.enlarge = false
+                phoneObject.badgeBtn.show = false
+                phoneObject.badgeRight.show = true
+                phoneObject.badgeRight.enlarge = true
+                phoneObject.badgeLeft.show = true
+                phoneObject.badgeLeft.enlarge = true
+                phoneObject.badgeClose.show = true
+                phoneObject.badgeClose.enlarge = true
+                let cgLength = 0;
+                if(CGArr.length < 3){
+                    cgLength = CGArr.length
+                }else{
+                    cgLength = 3
+                }
+                if(cgLength > 0){
+                    for(let i=0;i<cgLength;i++){
+                        phoneObject[`badge${i+1}`].show = true
+                        phoneObject[`badge${i+1}`].image.src = `./images/phone/badge/${CGArr[i]}.png`
+                    }
+                }
+                
+            }
+        }
+        if(phoneObject.badgeClose.enlarge){
+            if(x>=phoneObject.badgeClose.position.x && x<=phoneObject.badgeClose.position.x + phoneObject.badgeClose.width && y>=phoneObject.badgeClose.position.y && y<=phoneObject.badgeClose.position.y+phoneObject.badgeClose.height){
+                phoneui.image.src = "./images/phone/bg.png"
+                phoneObject.badgeClose.enlarge = false
+                phoneObject.badgeClose.show = false
+                phoneObject.badgeLeft.show = false
+                phoneObject.badgeLeft.enlarge = false
+                phoneObject.badgeRight.show = false
+                phoneObject.badgeRight.enlarge = false
+                phoneObject.badge1.show = false
+                phoneObject.badge2.show = false
+                phoneObject.badge3.show = false
+                setTimeout(()=>{
+                    phoneObject.badgeBtn.show = true
+                    phoneObject.badgeBtn.enlarge = true
+                }, 20)
+
+            }
+        }
+        
         return
     }
     if(isRoomOpen){
@@ -862,8 +917,6 @@ canvas.addEventListener('click', (e)=>{
                 coolObject.talk06Chk = false
                 globalClick = true
                 interactions.filter(interaction=>interaction.name === 'cool')[0].show = false
-                console.log(startNav);
-                console.log(isTeaching);
                 setTimeout(()=>{
                     starts.start07.show = true
                 },10)
@@ -1127,6 +1180,7 @@ canvas.addEventListener('click', (e)=>{
                     }else{
                         coolObject.end.image.src = coolObject.end.image.src.replace('good', 'bad')
                         getCG.cool.push(0)
+                        CGArr.push(2)
                         stopBgm()
                         audioBadend.play()
                         coolObject.people.show = true
@@ -1172,6 +1226,7 @@ canvas.addEventListener('click', (e)=>{
                     }else{
                         coolObject.end.image.src = coolObject.end.image.src.replace('good', 'bad')
                         getCG.cool.push(0)
+                        CGArr.push(2)
                         stopBgm()
                         audioBadend.play()
                         coolObject.people.show = true
@@ -1206,10 +1261,12 @@ canvas.addEventListener('click', (e)=>{
                 if(!CG.cool.isPeace){
                     coolObject.end.image.src = coolObject.end.image.src.replace('good', 'bad')
                     getCG.cool.push(0)
+                    CGArr.push(2)
                     stopBgm()
                     audioBadend.play()
                 }else{
                     getCG.cool.push(1)
+                    CGArr.push(1)
                     stopBgm()
                     audioGoodend.play()
                 }
@@ -1492,10 +1549,12 @@ canvas.addEventListener('click', (e)=>{
                 if(!CG.occupy.isPeace){
                     occupyObject.end.image.src = occupyObject.end.image.src.replace('good', 'bad');
                     getCG.occupy.push(0)
+                    CGArr.push(14)
                     stopBgm()
                     audioBadend.play()
                 }else{
                     getCG.occupy.push(1)
+                    CGArr.push(13)
                     stopBgm()
                     audioGoodend.play()
                 }
@@ -1994,6 +2053,7 @@ canvas.addEventListener('click', (e)=>{
                         hoardObject.people.image.src = hoardObject.people.image.src.replace('people3', 'people2')
                     }
                     getCG.hoard.push(0)
+                    CGArr.push(8)
                     stopBgm()
                     audioBadend.play()
                     hoardObject.end.image.src = hoardObject.end.image.src.replace('good', 'bad')
@@ -2001,6 +2061,7 @@ canvas.addEventListener('click', (e)=>{
                     stopBgm()
                     audioGoodend.play()
                     getCG.hoard.push(1)
+                    CGArr.push(7)
                 }
                 hoardObject.end.show = true
             }
@@ -2022,6 +2083,7 @@ canvas.addEventListener('click', (e)=>{
                         hoardObject.people.image.src = hoardObject.people.image.src.replace('people3', 'people2')
                     }
                     getCG.hoard.push(0)
+                    CGArr.push(8)
                     stopBgm()
                     audioBadend.play()
                     hoardObject.end.image.src = hoardObject.end.image.src.replace('good', 'bad')
@@ -2029,6 +2091,7 @@ canvas.addEventListener('click', (e)=>{
                     stopBgm()
                     audioGoodend.play()
                     getCG.hoard.push(1)
+                    CGArr.push(7)
                 }
                 hoardObject.end.show = true
             }
@@ -2052,11 +2115,13 @@ canvas.addEventListener('click', (e)=>{
                         hoardObject.people.image.src = hoardObject.people.image.src.replace('people3', 'people2')
                     }
                     getCG.hoard.push(0)
+                    CGArr.push(8)
                     stopBgm()
                     audioBadend.play()
                     hoardObject.end.image.src = hoardObject.end.image.src.replace('good', 'bad')
                 }else{
                     getCG.hoard.push(1)
+                    CGArr.push(7)
                     stopBgm()
                     audioGoodend.play()
                 }
@@ -2311,8 +2376,8 @@ canvas.addEventListener('click', (e)=>{
                 setTimeout(()=>{
                     if(!isRoomOpen) return
                     netObject.web.show = true
-                    netObject.left.show = true
-                    netObject.left.enlarge = true
+                    netObject.left.show = false
+                    netObject.left.enlarge = false
                     netObject.right.show = true
                     netObject.right.enlarge = true
                 }, 10)
@@ -2325,6 +2390,11 @@ canvas.addEventListener('click', (e)=>{
                     clickVedioPlay('btn')
                     netObject.webNum --
                     netObject.web.image.src = `./images/network/web/web${netObject.webNum}.png`
+                    netObject.left.show = (netObject.webNum > 1) ? true : false
+                    netObject.left.enlarge = (netObject.webNum > 1) ? true : false
+                    netObject.right.show = (netObject.webNum < 6) ? true : false
+                    netObject.right.enlarge = (netObject.webNum < 6) ? true : false
+                    
                 }
             }
             if(netObject.right.show && netObject.right.enlarge){
@@ -2333,6 +2403,8 @@ canvas.addEventListener('click', (e)=>{
                     clickVedioPlay('btn')
                     netObject.webNum ++
                     netObject.web.image.src = `./images/network/web/web${netObject.webNum}.png`
+                    netObject.left.show = (netObject.webNum > 1) ? true : false
+                    netObject.right.show = (netObject.webNum < 6) ? true : false
                 }
             }
             const initWebBtn = ()=>{
@@ -2434,6 +2506,7 @@ canvas.addEventListener('click', (e)=>{
 
                     if(!CG.network.isPeace){
                         getCG.network.push(0)
+                        CGArr.push(10)
                         stopBgm()
                         audioBadend.play()
                         if(netObject.end.image.src.includes('good')){
@@ -2441,6 +2514,7 @@ canvas.addEventListener('click', (e)=>{
                         }
                     }else{
                         getCG.network.push(1)
+                        CGArr.push(9)
                         stopBgm()
                         if(netObject.end.image.src.includes('bad')){
                             netObject.end.image.src = netObject.end.image.src.replace('bad', 'good')
@@ -2783,9 +2857,11 @@ canvas.addEventListener('click', (e)=>{
                                     }
                                     audioBadend.play()
                                     getCG.noisy.push(0)
+                                    CGArr.push(12)
                                 }else{
                                     audioGoodend.play()
                                     getCG.noisy.push(1)
+                                    CGArr.push(11)
                                 }
                                 noisyObject.end.show = true
                             }, 1500)
@@ -2839,9 +2915,11 @@ canvas.addEventListener('click', (e)=>{
                                     }
                                     audioBadend.play()
                                     getCG.noisy.push(0)
+                                    CGArr.push(12)
                                 }else{
                                     audioGoodend.play()
                                     getCG.noisy.push(1)
+                                    CGArr.push(11)
                                 }
                                 noisyObject.end.show = true
                             }, 1500)
@@ -2895,9 +2973,11 @@ canvas.addEventListener('click', (e)=>{
                                     }
                                     audioBadend.play()
                                     getCG.noisy.push(0)
+                                    CGArr.push(12)
                                 }else{
                                     audioGoodend.play()
                                     getCG.noisy.push(1)
+                                    CGArr.push(11)
                                 }
                                 noisyObject.end.show = true
                             }, 1500)
@@ -2951,9 +3031,11 @@ canvas.addEventListener('click', (e)=>{
                                     }
                                     audioBadend.play()
                                     getCG.noisy.push(0)
+                                    CGArr.push(12)
                                 }else{
                                     audioGoodend.play()
                                     getCG.noisy.push(1)
+                                    CGArr.push(11)
                                 }
                                 noisyObject.end.show = true
                             }, 1500)
@@ -3007,9 +3089,11 @@ canvas.addEventListener('click', (e)=>{
                                     }
                                     audioBadend.play()
                                     getCG.noisy.push(0)
+                                    CGArr.push(12)
                                 }else{
                                     audioGoodend.play()
                                     getCG.noisy.push(1)
+                                    CGArr.push(11)
                                 }
                                 noisyObject.end.show = true
                             }, 1500)
@@ -3063,9 +3147,11 @@ canvas.addEventListener('click', (e)=>{
                                     }
                                     audioBadend.play()
                                     getCG.noisy.push(0)
+                                    CGArr.push(12)
                                 }else{
                                     audioGoodend.play()
                                     getCG.noisy.push(1)
+                                    CGArr.push(11)
                                 }
                                 noisyObject.end.show = true
                             }, 1500)
@@ -3118,9 +3204,11 @@ canvas.addEventListener('click', (e)=>{
                                     }
                                     audioBadend.play()
                                     getCG.noisy.push(0)
+                                    CGArr.push(12)
                                 }else{
                                     audioGoodend.play()
                                     getCG.noisy.push(1)
+                                    CGArr.push(11)
                                 }
                                 noisyObject.end.show = true
                             }, 1500)
@@ -3379,9 +3467,11 @@ canvas.addEventListener('click', (e)=>{
                         delayObject.end.image.src = delayObject.end.image.src.replace('good', 'bad')
                         audioBadend.play()
                         getCG.delay.push(0)
+                        CGArr.push(4)
                     }else{
                         audioGoodend.play()
                         getCG.delay.push(1)
+                        CGArr.push(3)
                     }
                     delayObject.talk16A.show = false
                     delayObject.talk16B.show = false
@@ -3404,9 +3494,11 @@ canvas.addEventListener('click', (e)=>{
                         delayObject.end.image.src = delayObject.end.image.src.replace('good', 'bad')
                         audioBadend.play()
                         getCG.delay.push(0)
+                        CGArr.push(4)
                     }else{
                         audioGoodend.play()
                         getCG.delay.push(1)
+                        CGArr.push(3)
                     }
                     delayObject.talk16A.show = false
                     delayObject.talk16B.show = false
@@ -3499,6 +3591,7 @@ canvas.addEventListener('click', (e)=>{
                     clickVedioPlay('obj')
                     audioGoodend.play()
                     getCG.delay.push(3)
+                    CGArr.push(5)
                     delayObject.isGetCG1 = true
                     delayObject.CG1.enlarge = false
                     delayObject.getCG1.show = true
@@ -3520,6 +3613,7 @@ canvas.addEventListener('click', (e)=>{
                 if(x>=delayObject.CG2.position.x && x<=delayObject.CG2.position.x + delayObject.CG2.width && y>=delayObject.CG2.position.y && y<=delayObject.CG2.position.y+delayObject.CG2.height){
                     clickVedioPlay('obj')
                     getCG.delay.push(4)
+                    CGArr.push(6)
                     audioGoodend.play()
                     delayObject.isGetCG2 = true
                     delayObject.CG2.enlarge = false
@@ -3742,7 +3836,9 @@ canvas.addEventListener('click', (e)=>{
                 roadObject.talk2Chk = true
             }, 1500)
         }else if(interaction.name === 'mailbox'){
-            window.open('https://forms.gle/WU1ZxSE2uU6QvYvU9')
+            if(!isRoomOpen){
+                window.open('https://forms.gle/WU1ZxSE2uU6QvYvU9')
+            }
         }
         
     })
