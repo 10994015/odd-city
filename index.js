@@ -693,7 +693,6 @@ function animate(){
             }
         }
     }
-    
 
     interactions.forEach(interaction=>{
         if(interaction.show===false) return
