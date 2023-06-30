@@ -508,13 +508,56 @@ const roads = {
     talk2A: new Shared({x:playerTalkX-(2378/4.5)-25, y:playerTalkXY-630/4.5, w:2378/4.5, h:630/4.5, image: createImage('./images/roads/talk/2A.png'), isTalk:true, isEnlarge:false, multiple:1.02, name:'2A', isShow:false,}),
     talk2B: new Shared({x:playerTalkX-(2378/4.5)-25, y:playerTalkXY-630/4.5*2-15, w:2378/4.5, h:630/4.5, image: createImage('./images/roads/talk/2B.png'), isTalk:true, isEnlarge:false, multiple:1.02, name:'2B', isShow:false}),
     talk5: new Shared({x:canvas.width/2 - (3149/4.5)/2, y:canvas.height/2 - (484/4.5)/2, w:3149/4.5, h:484/4.5, image: createImage('./images/roads/talk/5.png'), isTalk:true, isEnlarge:false, multiple:1, name:'5', isShow:false ,}),
+    talk6A: new Shared({x:playerTalkX-(2378/4.5)-25, y:playerTalkXY-630/4.5, w:2378/4.5, h:630/4.5, image: createImage('./images/roads/talk/6A.png'), isTalk:true, isEnlarge:false, multiple:1, name:'6A', isShow:false ,}),
+    talk6Ao: new Shared({x:playerTalkX-(2378/4.5)-25, y:playerTalkXY-630/4.5, w:2378/4.5, h:630/4.5, h:484/4.5, image: createImage('./images/roads/talk/6A_.png'), isTalk:true, isEnlarge:false, multiple:1, name:'6Ao', isShow:false ,}),
+    talk6B: new Shared({x:playerTalkX-(2378/4.5)-25, y:playerTalkXY-630/4.5*2-15, w:2378/4.5, h:630/4.5, image: createImage('./images/roads/talk/6B.png'), isTalk:true, isEnlarge:false, multiple:1, name:'6B', isShow:false ,}),
+    talk6Bo: new Shared({x:playerTalkX-(2378/4.5)-25, y:playerTalkXY-630/4.5*2-15, w:2378/4.5, h:630/4.5, image: createImage('./images/roads/talk/6B_.png'), isTalk:true, isEnlarge:false, multiple:1, name:'6Bo', isShow:false ,}),
 
+    // a1talk: new Shared({x:716+20-2378/4.5, y:190, w:2378/4.5, h:630/4.5,  image: createImage('./images/roads/talk/a1talk.png'), isTalk:true, isEnlarge:false, multiple:1, name:'a1talk', isShow:false ,}),
+    // b1talk: new Shared({x:675-450, y:340-100, w:2378/4.5, h:630/4.5, image: createImage('./images/roads/talk/b1talk.png'), isTalk:true, isEnlarge:false, multiple:1, name:'b1talk', isShow:false ,}),
+    // b2talk: new Shared({x:675, y:340-100, w:2378/4.5, h:630/4.5, image: createImage('./images/roads/talk/b2talk.png'), isTalk:true, isEnlarge:false, multiple:1, name:'b2talk', isShow:false ,}),
+    // c1talk: new Shared({x:615-2378/4.5, y:660-630/4.5, w:2378/4.5, h:630/4.5, image: createImage('./images/roads/talk/c1talk.png'), isTalk:true, isEnlarge:false, multiple:1, name:'c1talk', isShow:false ,}),
+    // d1talk: new Shared({x:890-450, y:308, w:2378/4.5, h:630/4.5, image: createImage('./images/roads/talk/d1talk.png'), isTalk:true, isEnlarge:false, multiple:1, name:'d1talk', isShow:false ,}),
+    // e1talk: new Shared({x:615, y:421-100, w:2378/4.5, h:630/4.5,image: createImage('./images/roads/talk/e1talk.png'), isTalk:true, isEnlarge:false, multiple:1, name:'e1talk', isShow:false ,}),
+    // f1talk: new Shared({x:728, y:655-100, w:2378/4.5, h:630/4.5, image: createImage('./images/roads/talk/f1talk.png'), isTalk:true, isEnlarge:false, multiple:1, name:'f1talk', isShow:false ,}),
+    // g1talk: new Shared({x:890-350, y:288, w:2378/4.5, h:630/4.5, image: createImage('./images/roads/talk/g1talk.png'), isTalk:true, isEnlarge:false, multiple:1, name:'g1talk', isShow:false ,}),
+    // h1talk: new Shared({x:1216 - 2378/4.5, y:392, w:2378/4.5, h:630/4.5, image: createImage('./images/roads/talk/h1talk.png'), isTalk:true, isEnlarge:false, multiple:1, name:'h1talk', isShow:false ,}),
+    // i1talk: new Shared({x:736, y:567-630/4.5, w:2378/4.5, h:630/4.5,image: createImage('./images/roads/talk/i1talk.png'), isTalk:true, isEnlarge:false, multiple:1, name:'i1talk', isShow:false ,}),
+    // j1talk: new Shared({x:865-2378/4.5+100, y:427, w:2378/4.5, h:630/4.5, image: createImage('./images/roads/talk/j1talk.png'), isTalk:true, isEnlarge:false, multiple:1, name:'j1talk', isShow:false ,}),
+    // k1talk: new Shared({x:1240-2378/4.5, y:480+100, w:2378/4.5, h:630/4.5, image: createImage('./images/roads/talk/k1talk.png'), isTalk:true, isEnlarge:false, multiple:1, name:'k1talk', isShow:false ,}),
+    // l1talk: new Shared({x:832-2378/4.5+50, y:580-630/4.5, w:2378/4.5, h:630/4.5, image: createImage('./images/roads/talk/l1talk.png'), isTalk:true, isEnlarge:false, multiple:1, name:'l1talk', isShow:false ,}),
+
+    method0: new Shared({x:10 , y:10, w:2631/4.5, h:484/4.5, image: createImage('./images/roads/m0-13.png'), isTalk:true, isEnlarge:false, multiple:1, name:'method0', isShow:false ,}),
+    method1: new Shared({x:10 , y:10, w:2631/4.5, h:484/4.5, image: createImage('./images/roads/m1-13.png'), isTalk:true, isEnlarge:false, multiple:1, name:'method1', isShow:false ,}),
+    method2: new Shared({x:10 , y:10, w:2631/4.5, h:484/4.5, image: createImage('./images/roads/m2-13.png'), isTalk:true, isEnlarge:false, multiple:1, name:'method2', isShow:false ,}),
+    method3: new Shared({x:10 , y:10, w:2631/4.5, h:484/4.5, image: createImage('./images/roads/m3-13.png'), isTalk:true, isEnlarge:false, multiple:1, name:'method3', isShow:false ,}),
+    method4: new Shared({x:10 , y:10, w:2631/4.5, h:484/4.5, image: createImage('./images/roads/m4-13.png'), isTalk:true, isEnlarge:false, multiple:1, name:'method4', isShow:false ,}),
+    method5: new Shared({x:10 , y:10, w:2631/4.5, h:484/4.5, image: createImage('./images/roads/m5-13.png'), isTalk:true, isEnlarge:false, multiple:1, name:'method5', isShow:false ,}),
+    method6: new Shared({x:10 , y:10, w:2631/4.5, h:484/4.5, image: createImage('./images/roads/m6-13.png'), isTalk:true, isEnlarge:false, multiple:1, name:'method6', isShow:false ,}),
+    method7: new Shared({x:10 , y:10, w:2631/4.5, h:484/4.5, image: createImage('./images/roads/m7-13.png'), isTalk:true, isEnlarge:false, multiple:1, name:'method7', isShow:false ,}),
+    method8: new Shared({x:10 , y:10, w:2631/4.5, h:484/4.5, image: createImage('./images/roads/m8-13.png'), isTalk:true, isEnlarge:false, multiple:1, name:'method8', isShow:false ,}),
+    method9: new Shared({x:10 , y:10, w:2631/4.5, h:484/4.5, image: createImage('./images/roads/m9-13.png'), isTalk:true, isEnlarge:false, multiple:1, name:'method9', isShow:false ,}),
+    method10: new Shared({x:10 , y:10, w:2631/4.5, h:484/4.5, image: createImage('./images/roads/m10-13.png'), isTalk:true, isEnlarge:false, multiple:1, name:'method10', isShow:false ,}),
+    method11: new Shared({x:10 , y:10, w:2631/4.5, h:484/4.5, image: createImage('./images/roads/m11-13.png'), isTalk:true, isEnlarge:false, multiple:1, name:'method11', isShow:false ,}),
+    method12: new Shared({x:10 , y:10, w:2631/4.5, h:484/4.5, image: createImage('./images/roads/m12-13.png'), isTalk:true, isEnlarge:false, multiple:1, name:'method12', isShow:false ,}),
+    method13: new Shared({x:10 , y:10, w:2631/4.5, h:484/4.5, image: createImage('./images/roads/m13-13.png'), isTalk:true, isEnlarge:false, multiple:1, name:'method13', isShow:false ,}),
+
+    angry0: new Shared({x:2631/9+10 , y:45, w:887/4.5, h:204/4.5, image: createImage('./images/roads/a0-3.png'), isTalk:true, isEnlarge:false, multiple:1, name:'angry0', isShow:false ,}),
+    angry1: new Shared({x:2631/9+10 , y:45, w:887/4.5, h:204/4.5, image: createImage('./images/roads/a1-3.png'), isTalk:true, isEnlarge:false, multiple:1, name:'angry1', isShow:false ,}),
+    angry2: new Shared({x:2631/9+10 , y:45, w:887/4.5, h:204/4.5, image: createImage('./images/roads/a2-3.png'), isTalk:true, isEnlarge:false, multiple:1, name:'angry2', isShow:false ,}),
+    angry3: new Shared({x:2631/9+10 , y:45, w:887/4.5, h:204/4.5, image: createImage('./images/roads/a3-3.png'), isTalk:true, isEnlarge:false, multiple:1, name:'angry3', isShow:false ,}),
+
+    badEnding: new Shared({x:canvas.width/2 - (2079/5)/2 , y:canvas.height/2 - (2123/5)/2  , w:2079/5, h:(2123/5), image: createImage('./images/roads/badEnding.png'), isTalk:true, isEnlarge:false, multiple:1, name:'badEnding', isShow:false ,}),
+    goodEnding: new Shared({x:canvas.width/2 - (2079/5)/2 , y:canvas.height/2 - (2123/5)/2  , w:2079/5, h:(2123/5), image: createImage('./images/roads/goodEnding.png'), isTalk:true, isEnlarge:false, multiple:1, name:'goodEnding', isShow:false ,}),
 
     response1: new Shared({x:mesterTalkX+5, y:mesterTalkY-630/4.5, w:2378/4.5, h:630/4.5, image: createImage('./images/res.png'), isTalk:true, isEnlarge:false, multiple:1, name:'1', isShow:false, text:"(看後照鏡)麻雀雖小勒！繞了幾百年都找不到停車位！", isTypewriter:true }),
     response3: new Shared({x:mesterTalkX+5, y:mesterTalkY-630/4.5, w:2378/4.5, h:630/4.5, image: createImage('./images/res.png'), isTalk:true, isEnlarge:false, multiple:1, name:'3', isShow:false, text:"欸！那邊還有個車位！", isTypewriter:true }),
     response4: new Shared({x:mesterTalkX+5, y:mesterTalkY-630/4.5, w:2378/4.5, h:630/4.5, image: createImage('./images/res.png'), isTalk:true, isEnlarge:false, multiple:1, name:'4', isShow:false, text:"喵的咧!被搶先了啦!都你害我們沒停車位!算了!看拎周罵怎麼搶過來!(準備拿出球棒下)", isTypewriter:true }),
-    
-    
+
+    end: new Shared({x:canvas.width/2 - (2079/5)/2 , y:canvas.height/2 - (2123/5)/2  , w:2079/5, h:(2123/5), image: createImage('./images/delays/goodend.png'), isEnlarge:false, multiple:1, name:'end', isShow:false,}),
+
+    // chk: new Shared({x:736-50+10 , y:567, w:112/2, h:68/2, image: createImage('./images/buttons/chk.png'), isEnlarge:false, multiple:1, name:'chk', isShow:false ,}),
+    chkED: new Shared({x:736-50+10 , y:567, w:112/2, h:68/2, image: createImage('./images/buttons/chk.png'), isEnlarge:false, multiple:1, name:'chk', isShow:false ,}),
     chk: new Shared({x:canvas.width/2 - (112/2)/2 + 300, y:canvas.height/2 - (68/2)/2 + 20, w:112/2, h:68/2, image: createImage('./images/buttons/chk.png'), isEnlarge:false, multiple:1, name:'chk', isShow:false ,}),
 
 }
