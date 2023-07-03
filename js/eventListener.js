@@ -835,7 +835,7 @@ const roadObject = {
 
     method:new Set(),
     angry:new Set(),
-
+    clickHistory: new Set(),
     goodEnding: roads.goodEnding,
     badEnding: roads.badEnding,
     chkED: roads.chkED,
@@ -1017,6 +1017,8 @@ canvas.addEventListener('click', (e)=>{
                 initNoisyRoom()
             }else if(roomOpen.delay){
                 initDelayRoom()
+            }else if(roomOpen.road){
+                initRoadRoom()
             }
             if(roomOpen.cool){
                 clickVedioPlay('inCoolRoom')
@@ -3831,10 +3833,7 @@ canvas.addEventListener('click', (e)=>{
                 roadObject.talk5.show = false
                 roadObject.chk.show = false
                 roadObject.chk.enlarge = false
-                roadObject.talk6A.show = true
-                roadObject.talk6A.enlarge = true
-                roadObject.talk6B.show = true
-                roadObject.talk6B.enlarge = true
+
                 roadObject.method0.show = true
                 roadObject.angry0.show = true
             }
@@ -3847,407 +3846,441 @@ canvas.addEventListener('click', (e)=>{
                 roadObject.talk6B.enlarge = false
             }
         }
-        if(roadObject.a1.enlarge){
-            if(x>=roadObject.a1.position.x && x<=roadObject.a1.position.x + roadObject.a1.width && y>=roadObject.a1.position.y && y<=roadObject.a1.position.y+roadObject.a1.height){
-                setTimeout(()=>{
-                    roadObject.a1talk.show = true
-                    roadObject.a1talkChk.show = true
-                    roadObject.a1talkCancel.show = true
+        if(!(roadObject.talk6A.show || roadObject.talk6B.show || roadObject.talk5.show || roadObject.talk2A.show || roadObject.talk2B.show)) {
+            if (roadObject.a1.enlarge  && !roadObject.clickHistory.has('a1')) {
+                if (x >= roadObject.a1.position.x && x <= roadObject.a1.position.x + roadObject.a1.width && y >= roadObject.a1.position.y && y <= roadObject.a1.position.y + roadObject.a1.height) {
+                    setTimeout(() => {
+                        roadObject.a1talk.show = true
+                        roadObject.a1talkChk.show = true
+                        roadObject.a1talkCancel.show = true
 
-                }, 100)
-
-            }
-
-        }
-        if(roadObject.a1.enlarge && roadObject.a1talkChk.show){
-            if(x>=roadObject.a1talkChk.position.x && x<=roadObject.a1talkChk.position.x + roadObject.a1talkChk.width && y>=roadObject.a1talkChk.position.y && y<=roadObject.a1talkChk.position.y+roadObject.a1talkChk.height){
-                setTimeout(()=>{
-                    roadObject.a1talk.show = false
-                    roadObject.a1talkChk.show = false
-                    roadObject.a1talkCancel.show = false
-                }, 100)
-                roadObject.angry.add('a1');
-            }
-        }
-
-        if(roadObject.a1.enlarge && roadObject.a1talkCancel.show){
-            if(x>=roadObject.a1talkCancel.position.x && x<=roadObject.a1talkCancel.position.x + roadObject.a1talkCancel.width && y>=roadObject.a1talkCancel.position.y && y<=roadObject.a1talkCancel.position.y+roadObject.a1talkCancel.height){
-                setTimeout(()=>{
-                    roadObject.a1talk.show = false
-                    roadObject.a1talkChk.show = false
-                    roadObject.a1talkCancel.show = false
-                }, 100)
-            }
-        }
-
-        if(roadObject.b1.enlarge){
-            if(x>=roadObject.b1.position.x && x<=roadObject.b1.position.x + roadObject.b1.width && y>=roadObject.b1.position.y && y<=roadObject.b1.position.y+roadObject.b1.height){
-                setTimeout(()=>{
-                    roadObject.b1talk.show = true
-                    roadObject.b1talkChk.show = true
-                    roadObject.b1talkCancel.show = true
-                    roadObject.b2talk.show = true
-                    roadObject.b2talkChk.show = true
-                    roadObject.b2talkCancel.show = true
-                }, 100)
-            }
-        }
-        if(roadObject.b1.enlarge && roadObject.b1talkChk.show){
-            if(x>=roadObject.b1talkChk.position.x && x<=roadObject.b1talkChk.position.x + roadObject.b1talkChk.width && y>=roadObject.b1talkChk.position.y && y<=roadObject.b1talkChk.position.y+roadObject.b1talkChk.height){
-                setTimeout(()=>{
-                    roadObject.b1talk.show = false
-                    roadObject.b1talkChk.show = false
-                    roadObject.b1talkCancel.show = false
-                    roadObject.b2talk.show = false
-                    roadObject.b2talkChk.show = false
-                    roadObject.b2talkCancel.show = false
-                }, 100)
-                roadObject.method.add('b1');
-            }
-        }
-        if(roadObject.b1.enlarge && roadObject.b1talkCancel.show){
-            if(x>=roadObject.b1talkCancel.position.x && x<=roadObject.b1talkCancel.position.x + roadObject.b1talkCancel.width && y>=roadObject.b1talkCancel.position.y && y<=roadObject.b1talkCancel.position.y+roadObject.b1talkCancel.height){
-                setTimeout(()=>{
-                    roadObject.b1talk.show = false
-                    roadObject.b1talkChk.show = false
-                    roadObject.b1talkCancel.show = false
-                    roadObject.b2talk.show = false
-                    roadObject.b2talkChk.show = false
-                    roadObject.b2talkCancel.show = false
-                }, 100)
-            }
-        }
-
-        if(roadObject.b1.enlarge && roadObject.b2talkChk.show){
-            if(x>=roadObject.b2talkChk.position.x && x<=roadObject.b2talkChk.position.x + roadObject.b2talkChk.width && y>=roadObject.b2talkChk.position.y && y<=roadObject.b2talkChk.position.y+roadObject.b2talkChk.height){
-                setTimeout(()=>{
-                    roadObject.b1talk.show = false
-                    roadObject.b1talkChk.show = false
-                    roadObject.b1talkCancel.show = false
-                    roadObject.b2talk.show = false
-                    roadObject.b2talkChk.show = false
-                    roadObject.b2talkCancel.show = false
-                }, 100)
-                roadObject.angry.add('b2');
-            }
-        }
-
-        if(roadObject.b1.enlarge && roadObject.b2talkCancel.show){
-            if(x>=roadObject.b2talkCancel.position.x && x<=roadObject.b2talkCancel.position.x + roadObject.b2talkCancel.width && y>=roadObject.b2talkCancel.position.y && y<=roadObject.b2talkCancel.position.y+roadObject.b2talkCancel.height){
-                setTimeout(()=>{
-                    roadObject.b1talk.show = false
-                    roadObject.b1talkChk.show = false
-                    roadObject.b1talkCancel.show = false
-                    roadObject.b2talk.show = false
-                    roadObject.b2talkChk.show = false
-                    roadObject.b2talkCancel.show = false
-                }, 100)
-            }
-        }
-        if(roadObject.c1.enlarge){
-            if(x>=roadObject.c1.position.x && x<=roadObject.c1.position.x + roadObject.c1.width && y>=roadObject.c1.position.y && y<=roadObject.c1.position.y+roadObject.c1.height){
-                setTimeout(()=>{
-                    roadObject.c1talk.show = true
-                    roadObject.c1talkChk.show = true
-                    roadObject.c1talkCancel.show = true
-
-                }, 100)
+                    }, 100)
+                    roadObject.clickHistory.add('a1');
+                }
 
             }
-        }
-        if(roadObject.c1.enlarge && roadObject.c1talkChk.show){
-            if(x>=roadObject.c1talkChk.position.x && x<=roadObject.c1talkChk.position.x + roadObject.c1talkChk.width && y>=roadObject.c1talkChk.position.y && y<=roadObject.c1talkChk.position.y+roadObject.c1talkChk.height){
-                setTimeout(()=>{
-                    roadObject.c1talk.show = false
-                    roadObject.c1talkChk.show = false
-                    roadObject.c1talkCancel.show = false
-                }, 100)
-                roadObject.angry.add('c1');
-            }
-        }
-        if(roadObject.c1.enlarge && roadObject.c1talkCancel.show){
-            if(x>=roadObject.c1talkCancel.position.x && x<=roadObject.c1talkCancel.position.x + roadObject.c1talkCancel.width && y>=roadObject.c1talkCancel.position.y && y<=roadObject.c1talkCancel.position.y+roadObject.c1talkCancel.height){
-                setTimeout(()=>{
-                    roadObject.c1talk.show = false
-                    roadObject.c1talkChk.show = false
-                    roadObject.c1talkCancel.show = false
-                }, 100)
-            }
-        }
+            if (roadObject.a1.enlarge && roadObject.a1talkChk.show) {
+                if (x >= roadObject.a1talkChk.position.x && x <= roadObject.a1talkChk.position.x + roadObject.a1talkChk.width && y >= roadObject.a1talkChk.position.y && y <= roadObject.a1talkChk.position.y + roadObject.a1talkChk.height) {
+                    setTimeout(() => {
+                        roadObject.a1talk.show = false
+                        roadObject.a1talkChk.show = false
+                        roadObject.a1talkCancel.show = false
+                    }, 100)
+                    roadObject.angry.add('a1');
+                    roadObject.method.add('a1');
 
-        if(roadObject.d1.enlarge){
-            if(x>=roadObject.d1.position.x && x<=roadObject.d1.position.x + roadObject.d1.width && y>=roadObject.d1.position.y && y<=roadObject.d1.position.y+roadObject.d1.height){
-                setTimeout(()=>{
-                    roadObject.d1talk.show = true
-                    roadObject.d1talkChk.show = true
-                    roadObject.d1talkCancel.show = true
-                }, 100)
+                }
+            }
 
+            if (roadObject.a1.enlarge && roadObject.a1talkCancel.show) {
+                if (x >= roadObject.a1talkCancel.position.x && x <= roadObject.a1talkCancel.position.x + roadObject.a1talkCancel.width && y >= roadObject.a1talkCancel.position.y && y <= roadObject.a1talkCancel.position.y + roadObject.a1talkCancel.height) {
+                    setTimeout(() => {
+                        roadObject.a1talk.show = false
+                        roadObject.a1talkChk.show = false
+                        roadObject.a1talkCancel.show = false
+                    }, 100)
+                    roadObject.method.add('a1');
+                }
             }
-        }
-        if(roadObject.d1.enlarge && roadObject.d1talkChk.show){
-            if(x>=roadObject.d1talkChk.position.x && x<=roadObject.d1talkChk.position.x + roadObject.d1talkChk.width && y>=roadObject.d1talkChk.position.y && y<=roadObject.d1talkChk.position.y+roadObject.d1talkChk.height){
-                setTimeout(()=>{
-                    roadObject.d1talkChk.show = false
-                    roadObject.d1talk.show = false
-                    roadObject.d1talkCancel.show = false
-                }, 100)
-                roadObject.angry.add('d1');
-            }
-        }
-        if(roadObject.d1.enlarge && roadObject.d1talkCancel.show){
-            if(x>=roadObject.d1talkCancel.position.x && x<=roadObject.d1talkCancel.position.x + roadObject.d1talkCancel.width && y>=roadObject.d1talkCancel.position.y && y<=roadObject.d1talkCancel.position.y+roadObject.d1talkCancel.height){
-                setTimeout(()=>{
-                    roadObject.d1talkChk.show = false
-                    roadObject.d1talk.show = false
-                    roadObject.d1talkCancel.show = false
-                }, 100)
-            }
-        }
 
-        if(roadObject.e1.enlarge){
-            if(x>=roadObject.e1.position.x && x<=roadObject.e1.position.x + roadObject.e1.width && y>=roadObject.e1.position.y && y<=roadObject.e1.position.y+roadObject.e1.height){
-                setTimeout(()=>{
-                    roadObject.e1talk.show = true
-                    roadObject.e1talkChk.show = true
-                    roadObject.e1talkCancel.show = true
-                }, 100)
+            if (roadObject.b1.enlarge  && !roadObject.clickHistory.has('b1') ) {
+                if (x >= roadObject.b1.position.x && x <= roadObject.b1.position.x + roadObject.b1.width && y >= roadObject.b1.position.y && y <= roadObject.b1.position.y + roadObject.b1.height) {
+                    setTimeout(() => {
+                        roadObject.b1talk.show = true
+                        roadObject.b1talkChk.show = true
+                        roadObject.b1talkCancel.show = true
+                        roadObject.b2talk.show = true
+                        roadObject.b2talkChk.show = true
+                        roadObject.b2talkCancel.show = true
+                    }, 100)
+                    roadObject.clickHistory.add('b1');
+                    roadObject.clickHistory.add('b2');
+                }
+            }
+            if (roadObject.b1.enlarge && roadObject.b1talkChk.show) {
+                if (x >= roadObject.b1talkChk.position.x && x <= roadObject.b1talkChk.position.x + roadObject.b1talkChk.width && y >= roadObject.b1talkChk.position.y && y <= roadObject.b1talkChk.position.y + roadObject.b1talkChk.height) {
+                    setTimeout(() => {
+                        roadObject.b1talk.show = false
+                        roadObject.b1talkChk.show = false
+                        roadObject.b1talkCancel.show = false
+                        roadObject.b2talk.show = false
+                        roadObject.b2talkChk.show = false
+                        roadObject.b2talkCancel.show = false
+                    }, 100)
+                    roadObject.method.add('b1');
+                }
+            }
+            if (roadObject.b1.enlarge && roadObject.b1talkCancel.show) {
+                if (x >= roadObject.b1talkCancel.position.x && x <= roadObject.b1talkCancel.position.x + roadObject.b1talkCancel.width && y >= roadObject.b1talkCancel.position.y && y <= roadObject.b1talkCancel.position.y + roadObject.b1talkCancel.height) {
+                    setTimeout(() => {
+                        roadObject.b1talk.show = false
+                        roadObject.b1talkChk.show = false
+                        roadObject.b1talkCancel.show = false
+                        roadObject.b2talk.show = false
+                        roadObject.b2talkChk.show = false
+                        roadObject.b2talkCancel.show = false
+                    }, 100)
+                }
+            }
 
+            if (roadObject.b1.enlarge && roadObject.b2talkChk.show) {
+                if (x >= roadObject.b2talkChk.position.x && x <= roadObject.b2talkChk.position.x + roadObject.b2talkChk.width && y >= roadObject.b2talkChk.position.y && y <= roadObject.b2talkChk.position.y + roadObject.b2talkChk.height) {
+                    setTimeout(() => {
+                        roadObject.b1talk.show = false
+                        roadObject.b1talkChk.show = false
+                        roadObject.b1talkCancel.show = false
+                        roadObject.b2talk.show = false
+                        roadObject.b2talkChk.show = false
+                        roadObject.b2talkCancel.show = false
+                    }, 100)
+                    roadObject.angry.add('b2');
+                }
             }
-        }
-        if(roadObject.e1.enlarge && roadObject.e1talk.show){
-            if(x>=roadObject.e1talkChk.position.x && x<=roadObject.e1talkChk.position.x + roadObject.e1talkChk.width && y>=roadObject.e1talkChk.position.y && y<=roadObject.e1talkChk.position.y+roadObject.e1talkChk.height){
-                setTimeout(()=>{
-                    roadObject.e1talk.show = false
-                    roadObject.e1talkChk.show = false
-                    roadObject.e1talkCancel.show = false
-                }, 100)
-                roadObject.method.add('e1');
-            }
-        }
-        if(roadObject.e1.enlarge && roadObject.e1talk.show){
-            if(x>=roadObject.e1talkCancel.position.x && x<=roadObject.e1talkCancel.position.x + roadObject.e1talkCancel.width && y>=roadObject.e1talkCancel.position.y && y<=roadObject.e1talkCancel.position.y+roadObject.e1talkCancel.height){
-                setTimeout(()=>{
-                    roadObject.e1talk.show = false
-                    roadObject.e1talkChk.show = false
-                    roadObject.e1talkCancel.show = false
-                }, 100)
-            }
-        }
 
-        if(roadObject.f1.enlarge){
-            if(x>=roadObject.f1.position.x && x<=roadObject.f1.position.x + roadObject.f1.width && y>=roadObject.f1.position.y && y<=roadObject.f1.position.y+roadObject.f1.height){
-                setTimeout(()=>{
-                    roadObject.f1talk.show = true
-                    roadObject.f1talkChk.show = true
-                    roadObject.f1talkCancel.show = true
-                }, 100)
+            if (roadObject.b1.enlarge && roadObject.b2talkCancel.show) {
+                if (x >= roadObject.b2talkCancel.position.x && x <= roadObject.b2talkCancel.position.x + roadObject.b2talkCancel.width && y >= roadObject.b2talkCancel.position.y && y <= roadObject.b2talkCancel.position.y + roadObject.b2talkCancel.height) {
+                    setTimeout(() => {
+                        roadObject.b1talk.show = false
+                        roadObject.b1talkChk.show = false
+                        roadObject.b1talkCancel.show = false
+                        roadObject.b2talk.show = false
+                        roadObject.b2talkChk.show = false
+                        roadObject.b2talkCancel.show = false
+                    }, 100)
+                }
+            }
+            if (roadObject.c1.enlarge  && !roadObject.clickHistory.has('c1')) {
+                if (x >= roadObject.c1.position.x && x <= roadObject.c1.position.x + roadObject.c1.width && y >= roadObject.c1.position.y && y <= roadObject.c1.position.y + roadObject.c1.height) {
+                    setTimeout(() => {
+                        roadObject.c1talk.show = true
+                        roadObject.c1talkChk.show = true
+                        roadObject.c1talkCancel.show = true
 
-            }
-        }
-        if(roadObject.f1.enlarge && roadObject.f1talk.show){
-            if(x>=roadObject.f1talkChk.position.x && x<=roadObject.f1talkChk.position.x + roadObject.f1talkChk.width && y>=roadObject.f1talkChk.position.y && y<=roadObject.f1talkChk.position.y+roadObject.f1talkChk.height){
-                setTimeout(()=>{
-                    roadObject.f1talk.show = false
-                    roadObject.f1talkChk.show = false
-                    roadObject.f1talkCancel.show = false
-                }, 100)
-                roadObject.method.add('f1');
-            }
-        }
-        if(roadObject.f1.enlarge && roadObject.f1talkCancel.show){
-            if(x>=roadObject.f1talkCancel.position.x && x<=roadObject.f1talkCancel.position.x + roadObject.f1talkCancel.width && y>=roadObject.f1talkCancel.position.y && y<=roadObject.f1talkCancel.position.y+roadObject.f1talkCancel.height){
-                setTimeout(()=>{
-                    roadObject.f1talk.show = false
-                    roadObject.f1talkChk.show = false
-                    roadObject.f1talkCancel.show = false
-                }, 100)
-            }
-        }
-        if(roadObject.g1.enlarge){
-            if(x>=roadObject.g1.position.x && x<=roadObject.g1.position.x + roadObject.g1.width && y>=roadObject.g1.position.y && y<=roadObject.g1.position.y+roadObject.g1.height){
-                setTimeout(()=>{
-                    roadObject.g1talk.show = true
-                    roadObject.g1talkChk.show = true
-                    roadObject.g1talkCancel.show = true
-                }, 100)
+                    }, 100)
+                    roadObject.clickHistory.add('c1');
 
+                }
             }
-        }
-        if(roadObject.g1.enlarge && roadObject.g1talk.show){
-            if(x>=roadObject.g1talkChk.position.x && x<=roadObject.g1talkChk.position.x + roadObject.g1talkChk.width && y>=roadObject.g1talkChk.position.y && y<=roadObject.g1talkChk.position.y+roadObject.g1talkChk.height){
-                setTimeout(()=>{
-                    roadObject.g1talk.show = false
-                    roadObject.g1talkChk.show = false
-                    roadObject.g1talkCancel.show = false
+            if (roadObject.c1.enlarge && roadObject.c1talkChk.show) {
+                if (x >= roadObject.c1talkChk.position.x && x <= roadObject.c1talkChk.position.x + roadObject.c1talkChk.width && y >= roadObject.c1talkChk.position.y && y <= roadObject.c1talkChk.position.y + roadObject.c1talkChk.height) {
+                    setTimeout(() => {
+                        roadObject.c1talk.show = false
+                        roadObject.c1talkChk.show = false
+                        roadObject.c1talkCancel.show = false
+                    }, 100)
+                    roadObject.angry.add('c1');
+                    roadObject.method.add('c1');
+                }
+            }
+            if (roadObject.c1.enlarge && roadObject.c1talkCancel.show) {
+                if (x >= roadObject.c1talkCancel.position.x && x <= roadObject.c1talkCancel.position.x + roadObject.c1talkCancel.width && y >= roadObject.c1talkCancel.position.y && y <= roadObject.c1talkCancel.position.y + roadObject.c1talkCancel.height) {
+                    setTimeout(() => {
+                        roadObject.c1talk.show = false
+                        roadObject.c1talkChk.show = false
+                        roadObject.c1talkCancel.show = false
+                    }, 100)
+                    roadObject.method.add('c1');
+                }
+            }
 
-                }, 100)
-                roadObject.angry.add('g1');
+            if (roadObject.d1.enlarge && !roadObject.clickHistory.has('d1')) {
+                if (x >= roadObject.d1.position.x && x <= roadObject.d1.position.x + roadObject.d1.width && y >= roadObject.d1.position.y && y <= roadObject.d1.position.y + roadObject.d1.height) {
+                    setTimeout(() => {
+                        roadObject.d1talk.show = true
+                        roadObject.d1talkChk.show = true
+                        roadObject.d1talkCancel.show = true
+                    }, 100)
+                    roadObject.clickHistory.add('d1');
+                }
             }
-        }
-        if(roadObject.g1.enlarge && roadObject.g1talk.show){
-            if(x>=roadObject.g1talkCancel.position.x && x<=roadObject.g1talkCancel.position.x + roadObject.g1talkCancel.width && y>=roadObject.g1talkCancel.position.y && y<=roadObject.g1talkCancel.position.y+roadObject.g1talkCancel.height){
-                setTimeout(()=>{
-                    roadObject.g1talk.show = false
-                    roadObject.g1talkChk.show = false
-                    roadObject.g1talkCancel.show = false
+            if (roadObject.d1.enlarge && roadObject.d1talkChk.show) {
+                if (x >= roadObject.d1talkChk.position.x && x <= roadObject.d1talkChk.position.x + roadObject.d1talkChk.width && y >= roadObject.d1talkChk.position.y && y <= roadObject.d1talkChk.position.y + roadObject.d1talkChk.height) {
+                    setTimeout(() => {
+                        roadObject.d1talkChk.show = false
+                        roadObject.d1talk.show = false
+                        roadObject.d1talkCancel.show = false
+                    }, 100)
+                    roadObject.angry.add('d1');
+                    roadObject.method.add('d1');
 
-                }, 100)
+                }
             }
-        }
-        if(roadObject.h1.enlarge){
-            if(x>=roadObject.h1.position.x && x<=roadObject.h1.position.x + roadObject.h1.width && y>=roadObject.h1.position.y && y<=roadObject.h1.position.y+roadObject.h1.height){
-                setTimeout(()=>{
-                    roadObject.h1talk.show = true
-                    roadObject.h1talkChk.show = true
-                    roadObject.h1talkCancel.show = true
-                }, 100)
+            if (roadObject.d1.enlarge && roadObject.d1talkCancel.show) {
+                if (x >= roadObject.d1talkCancel.position.x && x <= roadObject.d1talkCancel.position.x + roadObject.d1talkCancel.width && y >= roadObject.d1talkCancel.position.y && y <= roadObject.d1talkCancel.position.y + roadObject.d1talkCancel.height) {
+                    setTimeout(() => {
+                        roadObject.d1talkChk.show = false
+                        roadObject.d1talk.show = false
+                        roadObject.d1talkCancel.show = false
+                    }, 100)
+                    roadObject.method.add('d1');
+                }
+            }
 
+            if (roadObject.e1.enlarge && !roadObject.clickHistory.has('e1')) {
+                if (x >= roadObject.e1.position.x && x <= roadObject.e1.position.x + roadObject.e1.width && y >= roadObject.e1.position.y && y <= roadObject.e1.position.y + roadObject.e1.height) {
+                    setTimeout(() => {
+                        roadObject.e1talk.show = true
+                        roadObject.e1talkChk.show = true
+                        roadObject.e1talkCancel.show = true
+                    }, 100)
+                    roadObject.clickHistory.add('e1');
+                }
             }
-        }
-        if(roadObject.h1.enlarge && roadObject.h1talk.show){
-            if(x>=roadObject.h1talkChk.position.x && x<=roadObject.h1talkChk.position.x + roadObject.h1talkChk.width && y>=roadObject.h1talkChk.position.y && y<=roadObject.h1talkChk.position.y+roadObject.h1talkChk.height){
-                setTimeout(()=>{
-                    roadObject.h1talk.show = false
-                    roadObject.h1talkChk.show = false
-                    roadObject.h1talkCancel.show = false
-                }, 100)
-                roadObject.angry.add('h1');
+            if (roadObject.e1.enlarge && roadObject.e1talk.show) {
+                if (x >= roadObject.e1talkChk.position.x && x <= roadObject.e1talkChk.position.x + roadObject.e1talkChk.width && y >= roadObject.e1talkChk.position.y && y <= roadObject.e1talkChk.position.y + roadObject.e1talkChk.height) {
+                    setTimeout(() => {
+                        roadObject.e1talk.show = false
+                        roadObject.e1talkChk.show = false
+                        roadObject.e1talkCancel.show = false
+                    }, 100)
+                    roadObject.method.add('e1');
+                }
             }
-        }
-        if(roadObject.h1.enlarge && roadObject.h1talk.show){
-            if(x>=roadObject.h1talkCancel.position.x && x<=roadObject.h1talkCancel.position.x + roadObject.h1talkCancel.width && y>=roadObject.h1talkCancel.position.y && y<=roadObject.h1talkCancel.position.y+roadObject.h1talkCancel.height){
-                setTimeout(()=>{
-                    roadObject.h1talk.show = false
-                    roadObject.h1talkChk.show = false
-                    roadObject.h1talkCancel.show = false
-                }, 100)
+            if (roadObject.e1.enlarge && roadObject.e1talk.show) {
+                if (x >= roadObject.e1talkCancel.position.x && x <= roadObject.e1talkCancel.position.x + roadObject.e1talkCancel.width && y >= roadObject.e1talkCancel.position.y && y <= roadObject.e1talkCancel.position.y + roadObject.e1talkCancel.height) {
+                    setTimeout(() => {
+                        roadObject.e1talk.show = false
+                        roadObject.e1talkChk.show = false
+                        roadObject.e1talkCancel.show = false
+                    }, 100)
+                }
             }
-        }
 
-        if(roadObject.i1.enlarge){
-            if(x>=roadObject.i1.position.x && x<=roadObject.i1.position.x + roadObject.i1.width && y>=roadObject.i1.position.y && y<=roadObject.i1.position.y+roadObject.i1.height){
-                setTimeout(()=>{
-                    roadObject.i1talk.show = true
-                    roadObject.i1talkChk.show = true
-                    roadObject.i1talkCancel.show = true
-                }, 100)
+            if (roadObject.f1.enlarge && !roadObject.clickHistory.has('f1')) {
+                if (x >= roadObject.f1.position.x && x <= roadObject.f1.position.x + roadObject.f1.width && y >= roadObject.f1.position.y && y <= roadObject.f1.position.y + roadObject.f1.height) {
+                    setTimeout(() => {
+                        roadObject.f1talk.show = true
+                        roadObject.f1talkChk.show = true
+                        roadObject.f1talkCancel.show = true
+                    }, 100)
+                    roadObject.clickHistory.add('f1');
+                }
             }
-        }
-        if(roadObject.i1.enlarge && roadObject.i1talk.show){
-            if(x>=roadObject.i1talkChk.position.x && x<=roadObject.i1talkChk.position.x + roadObject.i1talkChk.width && y>=roadObject.i1talkChk.position.y && y<=roadObject.i1talkChk.position.y+roadObject.i1talkChk.height){
-                setTimeout(()=>{
-                    roadObject.i1talk.show = false
-                    roadObject.i1talkChk.show = false
-                    roadObject.i1talkCancel.show = false
-                }, 100)
-                roadObject.angry.add('i1');
+            if (roadObject.f1.enlarge && roadObject.f1talk.show) {
+                if (x >= roadObject.f1talkChk.position.x && x <= roadObject.f1talkChk.position.x + roadObject.f1talkChk.width && y >= roadObject.f1talkChk.position.y && y <= roadObject.f1talkChk.position.y + roadObject.f1talkChk.height) {
+                    setTimeout(() => {
+                        roadObject.f1talk.show = false
+                        roadObject.f1talkChk.show = false
+                        roadObject.f1talkCancel.show = false
+                    }, 100)
+                    roadObject.method.add('f1');
+                }
             }
-        }
-        if(roadObject.i1.enlarge && roadObject.i1talk.show){
-            if(x>=roadObject.i1talkCancel.position.x && x<=roadObject.i1talkCancel.position.x + roadObject.i1talkCancel.width && y>=roadObject.i1talkCancel.position.y && y<=roadObject.i1talkCancel.position.y+roadObject.i1talkCancel.height){
-                setTimeout(()=>{
-                    roadObject.i1talk.show = false
-                    roadObject.i1talkChk.show = false
-                    roadObject.i1talkCancel.show = false
-                }, 100)
+            if (roadObject.f1.enlarge && roadObject.f1talkCancel.show) {
+                if (x >= roadObject.f1talkCancel.position.x && x <= roadObject.f1talkCancel.position.x + roadObject.f1talkCancel.width && y >= roadObject.f1talkCancel.position.y && y <= roadObject.f1talkCancel.position.y + roadObject.f1talkCancel.height) {
+                    setTimeout(() => {
+                        roadObject.f1talk.show = false
+                        roadObject.f1talkChk.show = false
+                        roadObject.f1talkCancel.show = false
+                    }, 100)
+                }
             }
-        }
+            if (roadObject.g1.enlarge && !roadObject.clickHistory.has('g1')) {
+                if (x >= roadObject.g1.position.x && x <= roadObject.g1.position.x + roadObject.g1.width && y >= roadObject.g1.position.y && y <= roadObject.g1.position.y + roadObject.g1.height) {
+                    setTimeout(() => {
+                        roadObject.g1talk.show = true
+                        roadObject.g1talkChk.show = true
+                        roadObject.g1talkCancel.show = true
+                    }, 100)
+                    roadObject.clickHistory.add('g1');
+                }
+            }
+            if (roadObject.g1.enlarge && roadObject.g1talk.show) {
+                if (x >= roadObject.g1talkChk.position.x && x <= roadObject.g1talkChk.position.x + roadObject.g1talkChk.width && y >= roadObject.g1talkChk.position.y && y <= roadObject.g1talkChk.position.y + roadObject.g1talkChk.height) {
+                    setTimeout(() => {
+                        roadObject.g1talk.show = false
+                        roadObject.g1talkChk.show = false
+                        roadObject.g1talkCancel.show = false
 
-        if(roadObject.j1.enlarge){
-            if(x>=roadObject.j1.position.x && x<=roadObject.j1.position.x + roadObject.j1.width && y>=roadObject.j1.position.y && y<=roadObject.j1.position.y+roadObject.j1.height){
-                setTimeout(()=>{
-                    roadObject.j1talk.show = true
-                    roadObject.j1talkChk.show = true
-                    roadObject.j1talkCancel.show = true
-                }, 100)
+                    }, 100)
+                    roadObject.angry.add('g1');
+                    roadObject.method.add('g1');
+                }
+            }
+            if (roadObject.g1.enlarge && roadObject.g1talk.show) {
+                if (x >= roadObject.g1talkCancel.position.x && x <= roadObject.g1talkCancel.position.x + roadObject.g1talkCancel.width && y >= roadObject.g1talkCancel.position.y && y <= roadObject.g1talkCancel.position.y + roadObject.g1talkCancel.height) {
+                    setTimeout(() => {
+                        roadObject.g1talk.show = false
+                        roadObject.g1talkChk.show = false
+                        roadObject.g1talkCancel.show = false
 
+                    }, 100)
+                    roadObject.method.add('g1');
+
+                }
+            }
+            if (roadObject.h1.enlarge && !roadObject.clickHistory.has('h1')) {
+                if (x >= roadObject.h1.position.x && x <= roadObject.h1.position.x + roadObject.h1.width && y >= roadObject.h1.position.y && y <= roadObject.h1.position.y + roadObject.h1.height) {
+                    setTimeout(() => {
+                        roadObject.h1talk.show = true
+                        roadObject.h1talkChk.show = true
+                        roadObject.h1talkCancel.show = true
+                    }, 100)
+                    roadObject.clickHistory.add('h1');
+                }
+            }
+            if (roadObject.h1.enlarge && roadObject.h1talk.show) {
+                if (x >= roadObject.h1talkChk.position.x && x <= roadObject.h1talkChk.position.x + roadObject.h1talkChk.width && y >= roadObject.h1talkChk.position.y && y <= roadObject.h1talkChk.position.y + roadObject.h1talkChk.height) {
+                    setTimeout(() => {
+                        roadObject.h1talk.show = false
+                        roadObject.h1talkChk.show = false
+                        roadObject.h1talkCancel.show = false
+                    }, 100)
+                    roadObject.angry.add('h1');
+                    roadObject.method.add('h1');
+                }
+            }
+            if (roadObject.h1.enlarge && roadObject.h1talk.show) {
+                if (x >= roadObject.h1talkCancel.position.x && x <= roadObject.h1talkCancel.position.x + roadObject.h1talkCancel.width && y >= roadObject.h1talkCancel.position.y && y <= roadObject.h1talkCancel.position.y + roadObject.h1talkCancel.height) {
+                    setTimeout(() => {
+                        roadObject.h1talk.show = false
+                        roadObject.h1talkChk.show = false
+                        roadObject.h1talkCancel.show = false
+                    }, 100)
+                    roadObject.method.add('h1');
+
+                }
+            }
+
+            if (roadObject.i1.enlarge && !roadObject.clickHistory.has('i1')) {
+                if (x >= roadObject.i1.position.x && x <= roadObject.i1.position.x + roadObject.i1.width && y >= roadObject.i1.position.y && y <= roadObject.i1.position.y + roadObject.i1.height) {
+                    setTimeout(() => {
+                        roadObject.i1talk.show = true
+                        roadObject.i1talkChk.show = true
+                        roadObject.i1talkCancel.show = true
+                    }, 100)
+                    roadObject.clickHistory.add('i1');
+                }
+            }
+            if (roadObject.i1.enlarge && roadObject.i1talk.show) {
+                if (x >= roadObject.i1talkChk.position.x && x <= roadObject.i1talkChk.position.x + roadObject.i1talkChk.width && y >= roadObject.i1talkChk.position.y && y <= roadObject.i1talkChk.position.y + roadObject.i1talkChk.height) {
+                    setTimeout(() => {
+                        roadObject.i1talk.show = false
+                        roadObject.i1talkChk.show = false
+                        roadObject.i1talkCancel.show = false
+                    }, 100)
+                    roadObject.angry.add('i1');
+                    roadObject.method.add('i1');
+                }
+            }
+            if (roadObject.i1.enlarge && roadObject.i1talk.show) {
+                if (x >= roadObject.i1talkCancel.position.x && x <= roadObject.i1talkCancel.position.x + roadObject.i1talkCancel.width && y >= roadObject.i1talkCancel.position.y && y <= roadObject.i1talkCancel.position.y + roadObject.i1talkCancel.height) {
+                    setTimeout(() => {
+                        roadObject.i1talk.show = false
+                        roadObject.i1talkChk.show = false
+                        roadObject.i1talkCancel.show = false
+                    }, 100)
+                    roadObject.method.add('i1');
+                }
+            }
+
+            if (roadObject.j1.enlarge && !roadObject.clickHistory.has('j1')) {
+                if (x >= roadObject.j1.position.x && x <= roadObject.j1.position.x + roadObject.j1.width && y >= roadObject.j1.position.y && y <= roadObject.j1.position.y + roadObject.j1.height) {
+                    setTimeout(() => {
+                        roadObject.j1talk.show = true
+                        roadObject.j1talkChk.show = true
+                        roadObject.j1talkCancel.show = true
+                    }, 100)
+                    roadObject.clickHistory.add('j1');
+
+                }
+            }
+
+            if (roadObject.j1.enlarge && roadObject.j1talk.show) {
+                if (x >= roadObject.j1talkChk.position.x && x <= roadObject.j1talkChk.position.x + roadObject.j1talkChk.width && y >= roadObject.j1talkChk.position.y && y <= roadObject.j1talkChk.position.y + roadObject.j1talkChk.height) {
+                    setTimeout(() => {
+                        roadObject.j1talk.show = false
+                        roadObject.j1talkChk.show = false
+                        roadObject.j1talkCancel.show = false
+                    }, 100)
+                    roadObject.angry.add('j1');
+                    roadObject.method.add('j1');
+                }
+            }
+            if (roadObject.j1.enlarge && roadObject.j1talk.show) {
+                if (x >= roadObject.j1talkCancel.position.x && x <= roadObject.j1talkCancel.position.x + roadObject.j1talkCancel.width && y >= roadObject.j1talkCancel.position.y && y <= roadObject.j1talkCancel.position.y + roadObject.j1talkCancel.height) {
+                    setTimeout(() => {
+                        roadObject.j1talk.show = false
+                        roadObject.j1talkChk.show = false
+                        roadObject.j1talkCancel.show = false
+                    }, 100)
+                    roadObject.method.add('j1');
+
+                }
+            }
+
+            if (roadObject.k1.enlarge && !roadObject.clickHistory.has('k1')) {
+                if (x >= roadObject.k1.position.x && x <= roadObject.k1.position.x + roadObject.k1.width && y >= roadObject.k1.position.y && y <= roadObject.k1.position.y + roadObject.k1.height) {
+                    setTimeout(() => {
+                        roadObject.k1talk.show = true
+                        roadObject.k1talkChk.show = true
+                        roadObject.k1talkCancel.show = true
+                    }, 100)
+                    roadObject.clickHistory.add('k1');
+                }
+            }
+            if (roadObject.k1.enlarge && roadObject.k1talk.show) {
+                if (x >= roadObject.k1talkChk.position.x && x <= roadObject.k1talkChk.position.x + roadObject.k1talkChk.width && y >= roadObject.k1talkChk.position.y && y <= roadObject.k1talkChk.position.y + roadObject.k1talkChk.height) {
+                    setTimeout(() => {
+                        roadObject.k1talk.show = false
+                        roadObject.k1talkChk.show = false
+                        roadObject.k1talkCancel.show = false
+
+                    }, 100)
+                    roadObject.angry.add('k1');
+                    roadObject.method.add('k1');
+                }
+            }
+
+            if (roadObject.k1.enlarge && roadObject.k1talk.show) {
+                if (x >= roadObject.k1talkCancel.position.x && x <= roadObject.k1talkCancel.position.x + roadObject.k1talkCancel.width && y >= roadObject.k1talkCancel.position.y && y <= roadObject.k1talkCancel.position.y + roadObject.k1talkCancel.height) {
+                    setTimeout(() => {
+                        roadObject.k1talk.show = false
+                        roadObject.k1talkChk.show = false
+                        roadObject.k1talkCancel.show = false
+
+                    }, 100)
+                    roadObject.method.add('k1');
+
+                }
+            }
+
+            if (roadObject.l1.enlarge && !roadObject.clickHistory.has('l1')) {
+                if (x >= roadObject.l1.position.x && x <= roadObject.l1.position.x + roadObject.l1.width && y >= roadObject.l1.position.y && y <= roadObject.l1.position.y + roadObject.l1.height) {
+                    setTimeout(() => {
+                        roadObject.l1talk.show = true
+                        roadObject.l1talkChk.show = true
+                        roadObject.l1talkCancel.show = true
+                    }, 100)
+                    roadObject.clickHistory.add('l1');
+                }
+            }
+            if (roadObject.l1.enlarge && roadObject.l1talk.show) {
+                if (x >= roadObject.l1talkChk.position.x && x <= roadObject.l1talkChk.position.x + roadObject.l1talkChk.width && y >= roadObject.l1talkChk.position.y && y <= roadObject.l1talkChk.position.y + roadObject.l1talkChk.height) {
+                    setTimeout(() => {
+                        roadObject.l1talk.show = false
+                        roadObject.l1talkChk.show = false
+                        roadObject.l1talkCancel.show = false
+
+                    }, 100)
+                    roadObject.angry.add('l1');
+                    roadObject.method.add('l1');
+                }
+            }
+
+            if (roadObject.l1.enlarge && roadObject.l1talk.show) {
+                if (x >= roadObject.l1talkCancel.position.x && x <= roadObject.l1talkCancel.position.x + roadObject.l1talkCancel.width && y >= roadObject.l1talkCancel.position.y && y <= roadObject.l1talkCancel.position.y + roadObject.l1talkCancel.height) {
+                    setTimeout(() => {
+                        roadObject.l1talk.show = false
+                        roadObject.l1talkChk.show = false
+                        roadObject.l1talkCancel.show = false
+
+                    }, 100)
+                    roadObject.method.add('l1');
+
+                }
             }
         }
-
-        if(roadObject.j1.enlarge && roadObject.j1talk.show){
-            if(x>=roadObject.j1talkChk.position.x && x<=roadObject.j1talkChk.position.x + roadObject.j1talkChk.width && y>=roadObject.j1talkChk.position.y && y<=roadObject.j1talkChk.position.y+roadObject.j1talkChk.height){
-                setTimeout(()=>{
-                    roadObject.j1talk.show = false
-                    roadObject.j1talkChk.show = false
-                    roadObject.j1talkCancel.show = false
-                }, 100)
-                roadObject.angry.add('j1');
-            }
-        }
-        if(roadObject.j1.enlarge && roadObject.j1talk.show){
-            if(x>=roadObject.j1talkCancel.position.x && x<=roadObject.j1talkCancel.position.x + roadObject.j1talkCancel.width && y>=roadObject.j1talkCancel.position.y && y<=roadObject.j1talkCancel.position.y+roadObject.j1talkCancel.height){
-                setTimeout(()=>{
-                    roadObject.j1talk.show = false
-                    roadObject.j1talkChk.show = false
-                    roadObject.j1talkCancel.show = false
-                }, 100)
-            }
-        }
-
-        if(roadObject.k1.enlarge){
-            if(x>=roadObject.k1.position.x && x<=roadObject.k1.position.x + roadObject.k1.width && y>=roadObject.k1.position.y && y<=roadObject.k1.position.y+roadObject.k1.height){
-                setTimeout(()=>{
-                    roadObject.k1talk.show = true
-                    roadObject.k1talkChk.show = true
-                    roadObject.k1talkCancel.show = true
-                }, 100)
-            }
-        }
-        if(roadObject.k1.enlarge && roadObject.k1talk.show){
-            if(x>=roadObject.k1talkChk.position.x && x<=roadObject.k1talkChk.position.x + roadObject.k1talkChk.width && y>=roadObject.k1talkChk.position.y && y<=roadObject.k1talkChk.position.y+roadObject.k1talkChk.height){
-                setTimeout(()=>{
-                    roadObject.k1talk.show = false
-                    roadObject.k1talkChk.show = false
-                    roadObject.k1talkCancel.show = false
-
-                }, 100)
-                roadObject.angry.add('k1');
-            }
-        }
-
-        if(roadObject.k1.enlarge && roadObject.k1talk.show){
-            if(x>=roadObject.k1talkCancel.position.x && x<=roadObject.k1talkCancel.position.x + roadObject.k1talkCancel.width && y>=roadObject.k1talkCancel.position.y && y<=roadObject.k1talkCancel.position.y+roadObject.k1talkCancel.height){
-                setTimeout(()=>{
-                    roadObject.k1talk.show = false
-                    roadObject.k1talkChk.show = false
-                    roadObject.k1talkCancel.show = false
-
-                }, 100)
-            }
-        }
-
-        if(roadObject.l1.enlarge){
-            if(x>=roadObject.l1.position.x && x<=roadObject.l1.position.x + roadObject.l1.width && y>=roadObject.l1.position.y && y<=roadObject.l1.position.y+roadObject.l1.height){
-                setTimeout(()=>{
-                    roadObject.l1talk.show = true
-                    roadObject.l1talkChk.show = true
-                    roadObject.l1talkCancel.show = true
-                }, 100)
-
-            }
-        }
-        if(roadObject.l1.enlarge && roadObject.l1talk.show){
-            if(x>=roadObject.l1talk.position.x && x<=roadObject.l1talk.position.x + roadObject.l1talk.width && y>=roadObject.l1talk.position.y && y<=roadObject.l1talk.position.y+roadObject.l1talk.height){
-                setTimeout(()=>{
-                    roadObject.l1talk.show = false
-                    roadObject.l1talkChk.show = false
-                    roadObject.l1talkCancel.show = false
-                }, 100)
-                roadObject.angry.add('l1');
-            }
-        }
-        if(roadObject.l1.enlarge && roadObject.l1talk.show){
-            if(x>=roadObject.l1talkCancel.position.x && x<=roadObject.l1talkCancel.position.x + roadObject.l1talkCancel.width && y>=roadObject.l1talkCancel.position.y && y<=roadObject.l1talkCancel.position.y+roadObject.l1talkCancel.height){
-                setTimeout(()=>{
-                    roadObject.l1talk.show = false
-                    roadObject.l1talkChk.show = false
-                    roadObject.l1talkCancel.show = false
-                }, 100)
-                roadObject.angry.add('l1');
-            }
-        }
-
         if(Array.from(roadObject.angry).length > 0){
             length = Array.from(roadObject.angry).length
             newPropertyName = "angry" + length
@@ -4284,6 +4317,12 @@ canvas.addEventListener('click', (e)=>{
         }
         if(Array.from(roadObject.method).length > 2){
             roadObject.method.clear()
+            setTimeout(()=>{
+                roadObject.talk6A.show = true
+                roadObject.talk6A.enlarge = true
+                roadObject.talk6B.show = true
+                roadObject.talk6B.enlarge = true
+            }, 100)
             roadObject.goodEnding.show = true
             roadObject.chkED.show = true
             roadObject.chkED.enlarge = true
@@ -4291,6 +4330,10 @@ canvas.addEventListener('click', (e)=>{
         if(roadObject.goodEnding.show){
             if(x>=roadObject.chkED.position.x && x<=roadObject.chkED.position.x + roadObject.chkED.width && y>=roadObject.chkED.position.y && y<=roadObject.chkED.position.y+roadObject.chkED.height){
                 setTimeout(()=>{
+                    roadObject.talk6A.show = false
+                    roadObject.talk6A.enlarge = false
+                    roadObject.talk6B.show = false
+                    roadObject.talk6B.enlarge = true
                     roadObject.goodEnding.show = false
                     roadObject.chkED.show = false
                     roadObject.chkED.enlarge = false
@@ -4536,7 +4579,7 @@ let occupyMoveNum = 0
 canvas.addEventListener('mouseup', ()=>{
     if(isDragging && roomOpen.occupy && isRoomOpen){
         let bool = occupys[mousedownIdx].position.x >= 1000 && occupys[mousedownIdx].position.x + occupys[mousedownIdx].oldWidth <= 1309 && occupys[mousedownIdx].position.y + occupys[mousedownIdx].oldHeight >= 251 && occupys[mousedownIdx].position.y + occupys[mousedownIdx].oldHeight <= 435
-        if(!bool){;
+        if(!bool){
             occupys[mousedownIdx].position.x = occupys[mousedownIdx].oldPosX
             occupys[mousedownIdx].position.y = occupys[mousedownIdx].oldPosY
             if(occupys[mousedownIdx].image.src.includes('1-1.png')){
@@ -4853,6 +4896,32 @@ function initDelayRoom(){
         }
     })
 }
+
+
+function initRoadRoom(){
+    console.log(123)
+    // roadObject.talk2Chk   = false
+    roadObject.talk2Chk = true
+    roadObject.response1.show = true
+    roadObject.talk2A.enlarge = true
+    roadObject.talk2B.enlarge = true
+
+    roadObject.method = new Set()
+    roadObject.angry = new Set()
+    roadObject.clickHistory = new Set()
+
+
+    for(let i= 0; i < 14; i++){
+        propertyName = "method" + i
+        roadObject[propertyName].show = false
+    }
+
+    for(let i= 0; i < 3; i++){
+        propertyName = "angry" + i
+        roadObject[propertyName].show = false
+    }
+}
+
 function clickVedioPlay(name){
     if(name == 'talk'){
         audioTalk.play()
@@ -4866,6 +4935,7 @@ function clickVedioPlay(name){
         audioInCoolRoom.play()
     }
 }
+
 
 function playBgm(){
     bgmAudio.loop = true
