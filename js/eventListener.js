@@ -3846,7 +3846,7 @@ canvas.addEventListener('click', (e)=>{
                 roadObject.talk6B.enlarge = false
             }
         }
-        if(!(roadObject.talk6A.show || roadObject.talk6B.show || roadObject.talk5.show || roadObject.talk2A.show || roadObject.talk2B.show)) {
+        if(!(roadObject.talk5.show || roadObject.talk2A.show || roadObject.talk2B.show)) {
             if (roadObject.a1.enlarge  && !roadObject.clickHistory.has('a1')) {
                 if (x >= roadObject.a1.position.x && x <= roadObject.a1.position.x + roadObject.a1.width && y >= roadObject.a1.position.y && y <= roadObject.a1.position.y + roadObject.a1.height) {
                     setTimeout(() => {
@@ -3855,7 +3855,6 @@ canvas.addEventListener('click', (e)=>{
                         roadObject.a1talkCancel.show = true
 
                     }, 100)
-                    roadObject.clickHistory.add('a1');
                 }
 
             }
@@ -3868,6 +3867,8 @@ canvas.addEventListener('click', (e)=>{
                     }, 100)
                     roadObject.angry.add('a1');
                     roadObject.method.add('a1');
+                    roadObject.clickHistory.add('a1');
+
 
                 }
             }
@@ -3893,8 +3894,7 @@ canvas.addEventListener('click', (e)=>{
                         roadObject.b2talkChk.show = true
                         roadObject.b2talkCancel.show = true
                     }, 100)
-                    roadObject.clickHistory.add('b1');
-                    roadObject.clickHistory.add('b2');
+
                 }
             }
             if (roadObject.b1.enlarge && roadObject.b1talkChk.show) {
@@ -3908,6 +3908,8 @@ canvas.addEventListener('click', (e)=>{
                         roadObject.b2talkCancel.show = false
                     }, 100)
                     roadObject.method.add('b1');
+                    roadObject.clickHistory.add('b1');
+                    roadObject.clickHistory.add('b2');
                 }
             }
             if (roadObject.b1.enlarge && roadObject.b1talkCancel.show) {
@@ -3934,6 +3936,8 @@ canvas.addEventListener('click', (e)=>{
                         roadObject.b2talkCancel.show = false
                     }, 100)
                     roadObject.angry.add('b2');
+                    roadObject.clickHistory.add('b1');
+                    roadObject.clickHistory.add('b2');
                 }
             }
 
@@ -3957,7 +3961,6 @@ canvas.addEventListener('click', (e)=>{
                         roadObject.c1talkCancel.show = true
 
                     }, 100)
-                    roadObject.clickHistory.add('c1');
 
                 }
             }
@@ -3970,6 +3973,8 @@ canvas.addEventListener('click', (e)=>{
                     }, 100)
                     roadObject.angry.add('c1');
                     roadObject.method.add('c1');
+                    roadObject.clickHistory.add('c1');
+
                 }
             }
             if (roadObject.c1.enlarge && roadObject.c1talkCancel.show) {
@@ -3990,7 +3995,6 @@ canvas.addEventListener('click', (e)=>{
                         roadObject.d1talkChk.show = true
                         roadObject.d1talkCancel.show = true
                     }, 100)
-                    roadObject.clickHistory.add('d1');
                 }
             }
             if (roadObject.d1.enlarge && roadObject.d1talkChk.show) {
@@ -4002,6 +4006,8 @@ canvas.addEventListener('click', (e)=>{
                     }, 100)
                     roadObject.angry.add('d1');
                     roadObject.method.add('d1');
+                    roadObject.clickHistory.add('d1');
+
 
                 }
             }
@@ -4023,7 +4029,6 @@ canvas.addEventListener('click', (e)=>{
                         roadObject.e1talkChk.show = true
                         roadObject.e1talkCancel.show = true
                     }, 100)
-                    roadObject.clickHistory.add('e1');
                 }
             }
             if (roadObject.e1.enlarge && roadObject.e1talk.show) {
@@ -4034,6 +4039,8 @@ canvas.addEventListener('click', (e)=>{
                         roadObject.e1talkCancel.show = false
                     }, 100)
                     roadObject.method.add('e1');
+                    roadObject.clickHistory.add('e1');
+
                 }
             }
             if (roadObject.e1.enlarge && roadObject.e1talk.show) {
@@ -4053,7 +4060,6 @@ canvas.addEventListener('click', (e)=>{
                         roadObject.f1talkChk.show = true
                         roadObject.f1talkCancel.show = true
                     }, 100)
-                    roadObject.clickHistory.add('f1');
                 }
             }
             if (roadObject.f1.enlarge && roadObject.f1talk.show) {
@@ -4064,6 +4070,8 @@ canvas.addEventListener('click', (e)=>{
                         roadObject.f1talkCancel.show = false
                     }, 100)
                     roadObject.method.add('f1');
+                    roadObject.clickHistory.add('f1');
+
                 }
             }
             if (roadObject.f1.enlarge && roadObject.f1talkCancel.show) {
@@ -4082,7 +4090,6 @@ canvas.addEventListener('click', (e)=>{
                         roadObject.g1talkChk.show = true
                         roadObject.g1talkCancel.show = true
                     }, 100)
-                    roadObject.clickHistory.add('g1');
                 }
             }
             if (roadObject.g1.enlarge && roadObject.g1talk.show) {
@@ -4095,6 +4102,8 @@ canvas.addEventListener('click', (e)=>{
                     }, 100)
                     roadObject.angry.add('g1');
                     roadObject.method.add('g1');
+                    roadObject.clickHistory.add('g1');
+
                 }
             }
             if (roadObject.g1.enlarge && roadObject.g1talk.show) {
@@ -4116,7 +4125,6 @@ canvas.addEventListener('click', (e)=>{
                         roadObject.h1talkChk.show = true
                         roadObject.h1talkCancel.show = true
                     }, 100)
-                    roadObject.clickHistory.add('h1');
                 }
             }
             if (roadObject.h1.enlarge && roadObject.h1talk.show) {
@@ -4128,6 +4136,8 @@ canvas.addEventListener('click', (e)=>{
                     }, 100)
                     roadObject.angry.add('h1');
                     roadObject.method.add('h1');
+                    roadObject.clickHistory.add('h1');
+
                 }
             }
             if (roadObject.h1.enlarge && roadObject.h1talk.show) {
@@ -4149,7 +4159,6 @@ canvas.addEventListener('click', (e)=>{
                         roadObject.i1talkChk.show = true
                         roadObject.i1talkCancel.show = true
                     }, 100)
-                    roadObject.clickHistory.add('i1');
                 }
             }
             if (roadObject.i1.enlarge && roadObject.i1talk.show) {
@@ -4161,6 +4170,8 @@ canvas.addEventListener('click', (e)=>{
                     }, 100)
                     roadObject.angry.add('i1');
                     roadObject.method.add('i1');
+                    roadObject.clickHistory.add('i1');
+
                 }
             }
             if (roadObject.i1.enlarge && roadObject.i1talk.show) {
@@ -4181,7 +4192,6 @@ canvas.addEventListener('click', (e)=>{
                         roadObject.j1talkChk.show = true
                         roadObject.j1talkCancel.show = true
                     }, 100)
-                    roadObject.clickHistory.add('j1');
 
                 }
             }
@@ -4195,6 +4205,8 @@ canvas.addEventListener('click', (e)=>{
                     }, 100)
                     roadObject.angry.add('j1');
                     roadObject.method.add('j1');
+                    roadObject.clickHistory.add('j1');
+
                 }
             }
             if (roadObject.j1.enlarge && roadObject.j1talk.show) {
@@ -4216,7 +4228,7 @@ canvas.addEventListener('click', (e)=>{
                         roadObject.k1talkChk.show = true
                         roadObject.k1talkCancel.show = true
                     }, 100)
-                    roadObject.clickHistory.add('k1');
+
                 }
             }
             if (roadObject.k1.enlarge && roadObject.k1talk.show) {
@@ -4229,6 +4241,7 @@ canvas.addEventListener('click', (e)=>{
                     }, 100)
                     roadObject.angry.add('k1');
                     roadObject.method.add('k1');
+                    roadObject.clickHistory.add('k1');
                 }
             }
 
@@ -4252,7 +4265,6 @@ canvas.addEventListener('click', (e)=>{
                         roadObject.l1talkChk.show = true
                         roadObject.l1talkCancel.show = true
                     }, 100)
-                    roadObject.clickHistory.add('l1');
                 }
             }
             if (roadObject.l1.enlarge && roadObject.l1talk.show) {
@@ -4265,6 +4277,8 @@ canvas.addEventListener('click', (e)=>{
                     }, 100)
                     roadObject.angry.add('l1');
                     roadObject.method.add('l1');
+                    roadObject.clickHistory.add('l1');
+
                 }
             }
 
@@ -4315,7 +4329,7 @@ canvas.addEventListener('click', (e)=>{
                 isRoomOpen = false
             }
         }
-        if(Array.from(roadObject.method).length > 2){
+        if(Array.from(roadObject.method).length > 12){
             roadObject.method.clear()
             setTimeout(()=>{
                 roadObject.talk6A.show = true
@@ -4323,17 +4337,19 @@ canvas.addEventListener('click', (e)=>{
                 roadObject.talk6B.show = true
                 roadObject.talk6B.enlarge = true
             }, 100)
+        }
+        if(roadObject.talk6A.enlarge && roadObject.talk6B.enlarge) {
+            roadObject.talk6A.show = false
+            roadObject.talk6A.enlarge = false
+            roadObject.talk6B.show = false
+            roadObject.talk6B.enlarge = false
             roadObject.goodEnding.show = true
-            roadObject.chkED.show = true
-            roadObject.chkED.enlarge = true
+
         }
         if(roadObject.goodEnding.show){
             if(x>=roadObject.chkED.position.x && x<=roadObject.chkED.position.x + roadObject.chkED.width && y>=roadObject.chkED.position.y && y<=roadObject.chkED.position.y+roadObject.chkED.height){
                 setTimeout(()=>{
-                    roadObject.talk6A.show = false
-                    roadObject.talk6A.enlarge = false
-                    roadObject.talk6B.show = false
-                    roadObject.talk6B.enlarge = true
+
                     roadObject.goodEnding.show = false
                     roadObject.chkED.show = false
                     roadObject.chkED.enlarge = false
