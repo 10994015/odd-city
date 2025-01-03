@@ -6,13 +6,14 @@ class Backgruond{
             this.loaded = true
         }
         this.loaded = false
-
+        // 背景的寬高，根據畫布高度進行比例計算
         this.width = 17.5185 * canvas.height -150
         this.height = canvas.height
     }
 
     draw(){
         if(!this.loaded) return
+        //背景圖
         c.drawImage(this.image, this.position.x, this.position.y, this.width, this.height)
     }
 }
@@ -115,15 +116,16 @@ class Bus{
         }
         this.image = image
         this.loaded = false
-        this.image.onload = ()=>{
+         // 當圖片加載完成時，設置 loaded 為 true
+         this.image.onload = ()=>{
             this.loaded = true
         }
-        this.frames = 0
-        this.calc = 0;
-        this.run = true
-        this.divisor = 5
-        this.currentCropWidth = 10752/4
-        this.start = false
+        this.frames = 0 // 當前幀數
+        this.calc = 0 // 計數器
+        this.run = true // 是否運行
+        this.divisor = 5 // 幀切換間隔
+        this.currentCropWidth = 10752 / 4 // 每幀寬度
+        this.start = false // 是否開始運行
     }
     draw(){
         if(!this.loaded) return
@@ -147,51 +149,50 @@ class Bus{
 }
 class Shared{
     constructor({x, y, w, h, image, isPeople=false, isEnlarge=false, isShow=true, isTalk=false,multiple=1.1, name=null, text="", color="#000", isTypewriter=false,frmaeNum=1}){
-        this.oldPosition = {
-            x, y
-        },
-        this.position = {
-           x,y
-        }
-        this.multiple = multiple
-        this.image = image
-        this.bigWidth = w*multiple
-        this.oldWidth = w
-        this.bigHeight = h*multiple
-        this.oldHeight = h
-        this.width = this.oldWidth
-        this.height = this.oldHeight
-        this.text = text
-        this.oldPosX  = x
-        this.oldPosY = y
-
-        this.loaded = false
-        this.image.onload = ()=>{
-            this.loaded = true
-        }
-        this.name = name
-        this.enlarge = isEnlarge
-        this.show = isShow
-        this.dragging = false
-        this.isPeople = isPeople
-        this.talk = isTalk
-        this.isTypewriter = isTypewriter
-        this.num = 0;
-        this.step = 0
-        this.twoStep = 25
-        this.threeStep = 50
-        this.color = color
-        this.frmaeNum = frmaeNum
-        this.frames = 0
-        this.currentCropWidth = w/frmaeNum
-        this.calc = 0;
-        if(this.text.split('').length <=24){
-            this.addHeight = 45
-        }else if(this.text.split('').length <=48){
-            this.addHeight = 40
-        }else{
-            this.addHeight = 36
-        }
+         // 初始化共享物件的屬性
+         this.oldPosition = { x, y } // 原始位置
+         this.position = { x, y } // 當前位置
+         this.multiple = multiple // 放大比例
+         this.image = image // 圖片
+         this.bigWidth = w * multiple // 放大後寬度
+         this.oldWidth = w // 原始寬度
+         this.bigHeight = h * multiple // 放大後高度
+         this.oldHeight = h // 原始高度
+         this.width = this.oldWidth // 當前寬度
+         this.height = this.oldHeight // 當前高度
+         this.text = text // 顯示的文字
+         this.oldPosX = x // 原始X座標
+         this.oldPosY = y // 原始Y座標
+ 
+         this.loaded = false // 圖片是否已加載
+         this.image.onload = ()=>{
+             this.loaded = true
+         }
+         this.name = name // 名稱
+         this.enlarge = isEnlarge // 是否放大
+         this.show = isShow // 是否顯示
+         this.dragging = false // 是否正在拖拽
+         this.isPeople = isPeople // 是否為人物
+         this.talk = isTalk // 是否正在對話
+         this.isTypewriter = isTypewriter // 是否啟用打字機效果
+         this.num = 0 // 計數器
+         this.step = 0 // 文字進度
+         this.twoStep = 25 // 第二行文字開始位置
+         this.threeStep = 50 // 第三行文字開始位置
+         this.color = color // 字體顏色
+         this.frmaeNum = frmaeNum // 幀數
+         this.frames = 0 // 當前幀
+         this.currentCropWidth = w / frmaeNum // 每幀寬度
+         this.calc = 0; // 計數器
+ 
+         // 設置文字框的高度
+         if(this.text.split('').length <= 24){
+             this.addHeight = 45
+         }else if(this.text.split('').length <= 48){
+             this.addHeight = 40
+         }else{
+             this.addHeight = 36
+         }
 
         
     }

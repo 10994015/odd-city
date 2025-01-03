@@ -39,26 +39,30 @@ const getCG = {
     delay:[],
     road:[],
 }
-const CGArr = [];
+let CGArr = JSON.parse(localStorage.getItem('cgGameProgress')) || []; //更新進度
+
 let occupyInteractiveBtn = false
 
 let scrollOffset =-2400
 let isStart = false
 
-const player = new Player()
-let lastKey;
-const createImage = (imgSrc)=>{
-    const image = new Image();
-    image.src = imgSrc
-    return image
-}
+const player = new Player();
+let lastKey; // 用於記錄玩家最後按下的鍵
 
+// 函數：創建圖像實例
+const createImage = (imgSrc) => {
+    const image = new Image(); // 創建 HTML image
+    image.src = imgSrc; // 來源
+    return image;
+};
+
+//初始化背景
 const backgruond = new Backgruond({
-    position:{
-        x:0, y:0
+    position: {
+        x: 0, y: 0 // 設定背景的初始位置
     },
-    image :createImage('./images/bg.png'),
-})
+    image: createImage('./images/bg.png'), 
+});
 const phone = new Interaction({x:1350, y:25, w:308/4.5, h:492/4.5, name:'phone',image: createImage('./images/buttons/phone.png'), multiple:1.05, isShow:true, isEnlarge:false})
 let openPhone = false
 const interactions = [
@@ -559,7 +563,7 @@ const keys = {
 }
 let busRun = false;
 let openAnim = null
-let busSpeed = 10
+let busSpeed = 1.5
 let beginningBool = true
 
 function loaded(){

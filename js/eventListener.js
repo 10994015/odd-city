@@ -1,91 +1,109 @@
 
+let mousedownIdx = null;
+let isDragging = false; // 是否正在拖動
 
+let differX = null;
+let differY = null;
 
-let mousedownIdx= null
-let isDragging = false
-let differX = null
-let differY = null
+window.addEventListener("keydown", ({ keyCode }) => {
+    // 如果遊戲尚未開始，則不執行任何操作
+    if (!isStart) return;
+    if (startNav) return;
+    // 如果玩家無法移動，則不執行任何操作
+    if (!player.move) return;
 
-window.addEventListener("keydown", ({keyCode})=>{
-    if(!isStart) return
-    if(startNav) return
-    if(!player.move) return
-    switch (keyCode){
-        case 87:
-            if(player.velocity.y ===0 ) player.velocity.y = -20
+    switch (keyCode) {
+        case 87: // W 鍵
+            // 如果玩家垂直速度為 0（未跳躍中），則設置向上的跳躍速度
+            if (player.velocity.y === 0) player.velocity.y = -20;
             break;
-        case 38:
-            if(player.velocity.y ===0 ) player.velocity.y = -20
+        case 38: // 上方向鍵
+            if (player.velocity.y === 0) player.velocity.y = -20;
             break;
-        case 68:
-            if(!isRoomOpen){
-                keys.right.pressed = true
-                lastKey = 'right'
-                audioRunning.loop = true
-                audioRunning.play()
+        case 68: // D 鍵
+            // 向右移動
+            if (!isRoomOpen) {
+                keys.right.pressed = true; // 設置右移狀態為按下
+                lastKey = 'right'; // 更新最後按下的鍵為 "右"
+                audioRunning.loop = true; // 設置跑步音效循環播放
+                audioRunning.play(); // 播放跑步音效
             }
             break;
-        case 39:
-            if(!isRoomOpen){
-                keys.right.pressed = true
-                lastKey = 'right'
-                audioRunning.loop = true
-                audioRunning.play()
+        case 39: // 右方向鍵
+            // 向右移動
+            if (!isRoomOpen) {
+                keys.right.pressed = true;
+                lastKey = 'right';
+                audioRunning.loop = true;
+                audioRunning.play();
             }
             break;
-        case 65:
-            if(!isRoomOpen){
-                keys.left.pressed = true
-                lastKey = 'left'
-                audioRunning.loop = true
-                audioRunning.play()
+        case 65: // A 鍵
+            // 向左移動
+            if (!isRoomOpen) {
+                keys.left.pressed = true; // 設置左移狀態為按下
+                lastKey = 'left'; // 更新最後按下的鍵為 "左"
+                audioRunning.loop = true; // 設置跑步音效循環播放
+                audioRunning.play(); 
             }
             break;
-        case 37:
-            if(!isRoomOpen){
-                keys.left.pressed = true
-                lastKey = 'left'
-                audioRunning.loop = true
-                audioRunning.play()
+        case 37: // 左方向鍵
+            // 向左移動
+            if (!isRoomOpen) {
+                keys.left.pressed = true;
+                lastKey = 'left';
+                audioRunning.loop = true;
+                audioRunning.play();
             }
             break;
     }
-})
+});
+// 為整個視窗添加鍵盤釋放事件監聽器
+window.addEventListener("keyup", ({ keyCode }) => {
+    // 如果遊戲尚未開始，則不執行任何操作
+    if (!isStart) return;
+    // 如果導航功能啟動中，則不執行任何操作
+    if (startNav) return;
+    // 如果玩家無法移動，則不執行任何操作
+    if (!player.move) return;
 
-window.addEventListener("keyup", ({keyCode})=>{
-    if(!isStart) return
-    if(startNav) return
-    if(!player.move) return
-    switch (keyCode){
-        case 68:
-            keys.right.pressed = false
-            audioRunning.pause()
-            audioRunning.currentTime = 0
+    // 根據釋放的按鍵執行對應行為
+    switch (keyCode) {
+        case 68: // D 鍵
+            // 停止右移動，更新狀態並停止跑步音效
+            keys.right.pressed = false;
+            audioRunning.pause(); // 暫停跑步音效
+            audioRunning.currentTime = 0; // 將音效播放位置重置為開始
             break;
-        case 39:
-            keys.right.pressed = false
-            audioRunning.pause()
-            audioRunning.currentTime = 0
+        case 39: // 右方向鍵
+            // 同樣處理停止右移邏輯
+            keys.right.pressed = false;
+            audioRunning.pause();
+            audioRunning.currentTime = 0;
             break;
-        case 65:
-            keys.left.pressed = false
-            audioRunning.pause()
-            audioRunning.currentTime = 0
+        case 65: // A 鍵
+            // 停止左移動，更新狀態並停止跑步音效
+            keys.left.pressed = false;
+            audioRunning.pause(); // 暫停跑步音效
+            audioRunning.currentTime = 0; // 將音效播放位置重置為開始
             break;
-        case 37:
-            keys.left.pressed = false
-            audioRunning.pause()
-            audioRunning.currentTime = 0
+        case 37: // 左方向鍵
+            // 同樣處理停止左移邏輯
+            keys.left.pressed = false;
+            audioRunning.pause();
+            audioRunning.currentTime = 0;
             break;
-        case 27:
-            // if(isRoomOpen){
+        case 27: // ESC 鍵
+            // if (isRoomOpen) {
+            //     // 重置房間開啟狀態
             //     for (let key in roomOpen) {
             //         roomOpen[key] = false;
-            //       }
-            //     isRoomOpen = false
+            //     }
+            //     isRoomOpen = false; // 關閉房間狀態
             // }
+            break;
     }
-})
+});
 
 canvas.addEventListener('mousemove', (e)=>{
     busAudioStart = false
@@ -605,6 +623,7 @@ const netObject = {
     
     end: networks.end,
 }
+//吵鬧
 const noisyObject = {
     wall1: noisys.wall1,
     wall2: noisys.wall2,
@@ -677,6 +696,7 @@ const noisyObject = {
     
     end: noisys.end,
 }
+//遲到
 const delayObject = {
     people: delays.people,
     talk1: delays.talk1,
@@ -745,6 +765,7 @@ const delayObject = {
     chkCGchk: false,
     end: delays.end,
 }
+//路霸
 const roadObject = {
     people: roads.people,
     response1: roads.response1,
@@ -757,6 +778,7 @@ const roadObject = {
     talk5Chk: false,
     chk: roads.chk,
 }
+//手機
 const phoneObject = {
     badgeBtn: phones.badgeBtn,
     badge1: phones.badge1,
@@ -1181,6 +1203,7 @@ canvas.addEventListener('click', (e)=>{
                         coolObject.end.image.src = coolObject.end.image.src.replace('good', 'bad')
                         getCG.cool.push(0)
                         CGArr.push(2)
+                        pushLocalStorage(CGArr);
                         stopBgm()
                         audioBadend.play()
                         coolObject.people.show = true
@@ -1227,6 +1250,7 @@ canvas.addEventListener('click', (e)=>{
                         coolObject.end.image.src = coolObject.end.image.src.replace('good', 'bad')
                         getCG.cool.push(0)
                         CGArr.push(2)
+                        pushLocalStorage(CGArr);
                         stopBgm()
                         audioBadend.play()
                         coolObject.people.show = true
@@ -1262,11 +1286,13 @@ canvas.addEventListener('click', (e)=>{
                     coolObject.end.image.src = coolObject.end.image.src.replace('good', 'bad')
                     getCG.cool.push(0)
                     CGArr.push(2)
+                    pushLocalStorage(CGArr);
                     stopBgm()
                     audioBadend.play()
                 }else{
                     getCG.cool.push(1)
                     CGArr.push(1)
+                    pushLocalStorage(CGArr);
                     stopBgm()
                     audioGoodend.play()
                 }
@@ -1550,11 +1576,13 @@ canvas.addEventListener('click', (e)=>{
                     occupyObject.end.image.src = occupyObject.end.image.src.replace('good', 'bad');
                     getCG.occupy.push(0)
                     CGArr.push(14)
+                    pushLocalStorage(CGArr);
                     stopBgm()
                     audioBadend.play()
                 }else{
                     getCG.occupy.push(1)
                     CGArr.push(13)
+                    pushLocalStorage(CGArr);
                     stopBgm()
                     audioGoodend.play()
                 }
@@ -2054,6 +2082,7 @@ canvas.addEventListener('click', (e)=>{
                     }
                     getCG.hoard.push(0)
                     CGArr.push(8)
+                    pushLocalStorage(CGArr);
                     stopBgm()
                     audioBadend.play()
                     hoardObject.end.image.src = hoardObject.end.image.src.replace('good', 'bad')
@@ -2062,6 +2091,7 @@ canvas.addEventListener('click', (e)=>{
                     audioGoodend.play()
                     getCG.hoard.push(1)
                     CGArr.push(7)
+                    pushLocalStorage(CGArr);
                 }
                 hoardObject.end.show = true
             }
@@ -2084,6 +2114,7 @@ canvas.addEventListener('click', (e)=>{
                     }
                     getCG.hoard.push(0)
                     CGArr.push(8)
+                    pushLocalStorage(CGArr);
                     stopBgm()
                     audioBadend.play()
                     hoardObject.end.image.src = hoardObject.end.image.src.replace('good', 'bad')
@@ -2092,6 +2123,7 @@ canvas.addEventListener('click', (e)=>{
                     audioGoodend.play()
                     getCG.hoard.push(1)
                     CGArr.push(7)
+                    pushLocalStorage(CGArr);
                 }
                 hoardObject.end.show = true
             }
@@ -2116,12 +2148,14 @@ canvas.addEventListener('click', (e)=>{
                     }
                     getCG.hoard.push(0)
                     CGArr.push(8)
+                    pushLocalStorage(CGArr);
                     stopBgm()
                     audioBadend.play()
                     hoardObject.end.image.src = hoardObject.end.image.src.replace('good', 'bad')
                 }else{
                     getCG.hoard.push(1)
                     CGArr.push(7)
+                    pushLocalStorage(CGArr);
                     stopBgm()
                     audioGoodend.play()
                 }
@@ -2507,6 +2541,7 @@ canvas.addEventListener('click', (e)=>{
                     if(!CG.network.isPeace){
                         getCG.network.push(0)
                         CGArr.push(10)
+                        pushLocalStorage(CGArr);
                         stopBgm()
                         audioBadend.play()
                         if(netObject.end.image.src.includes('good')){
@@ -2515,6 +2550,7 @@ canvas.addEventListener('click', (e)=>{
                     }else{
                         getCG.network.push(1)
                         CGArr.push(9)
+                        pushLocalStorage(CGArr);
                         stopBgm()
                         if(netObject.end.image.src.includes('bad')){
                             netObject.end.image.src = netObject.end.image.src.replace('bad', 'good')
@@ -2858,10 +2894,12 @@ canvas.addEventListener('click', (e)=>{
                                     audioBadend.play()
                                     getCG.noisy.push(0)
                                     CGArr.push(12)
+                                    pushLocalStorage(CGArr);
                                 }else{
                                     audioGoodend.play()
                                     getCG.noisy.push(1)
                                     CGArr.push(11)
+                                    pushLocalStorage(CGArr);
                                 }
                                 noisyObject.end.show = true
                             }, 1500)
@@ -2916,10 +2954,12 @@ canvas.addEventListener('click', (e)=>{
                                     audioBadend.play()
                                     getCG.noisy.push(0)
                                     CGArr.push(12)
+                                    pushLocalStorage(CGArr);
                                 }else{
                                     audioGoodend.play()
                                     getCG.noisy.push(1)
                                     CGArr.push(11)
+                                    pushLocalStorage(CGArr);
                                 }
                                 noisyObject.end.show = true
                             }, 1500)
@@ -2974,10 +3014,12 @@ canvas.addEventListener('click', (e)=>{
                                     audioBadend.play()
                                     getCG.noisy.push(0)
                                     CGArr.push(12)
+                                    pushLocalStorage(CGArr);
                                 }else{
                                     audioGoodend.play()
                                     getCG.noisy.push(1)
                                     CGArr.push(11)
+                                    pushLocalStorage(CGArr);
                                 }
                                 noisyObject.end.show = true
                             }, 1500)
@@ -3032,10 +3074,12 @@ canvas.addEventListener('click', (e)=>{
                                     audioBadend.play()
                                     getCG.noisy.push(0)
                                     CGArr.push(12)
+                                    pushLocalStorage(CGArr);
                                 }else{
                                     audioGoodend.play()
                                     getCG.noisy.push(1)
                                     CGArr.push(11)
+                                    pushLocalStorage(CGArr);
                                 }
                                 noisyObject.end.show = true
                             }, 1500)
@@ -3090,10 +3134,12 @@ canvas.addEventListener('click', (e)=>{
                                     audioBadend.play()
                                     getCG.noisy.push(0)
                                     CGArr.push(12)
+                                    pushLocalStorage(CGArr);
                                 }else{
                                     audioGoodend.play()
                                     getCG.noisy.push(1)
                                     CGArr.push(11)
+                                    pushLocalStorage(CGArr);
                                 }
                                 noisyObject.end.show = true
                             }, 1500)
@@ -3148,10 +3194,12 @@ canvas.addEventListener('click', (e)=>{
                                     audioBadend.play()
                                     getCG.noisy.push(0)
                                     CGArr.push(12)
+                                    pushLocalStorage(CGArr);
                                 }else{
                                     audioGoodend.play()
                                     getCG.noisy.push(1)
                                     CGArr.push(11)
+                                    pushLocalStorage(CGArr);
                                 }
                                 noisyObject.end.show = true
                             }, 1500)
@@ -3205,10 +3253,12 @@ canvas.addEventListener('click', (e)=>{
                                     audioBadend.play()
                                     getCG.noisy.push(0)
                                     CGArr.push(12)
+                                    pushLocalStorage(CGArr);
                                 }else{
                                     audioGoodend.play()
                                     getCG.noisy.push(1)
                                     CGArr.push(11)
+                                    pushLocalStorage(CGArr);
                                 }
                                 noisyObject.end.show = true
                             }, 1500)
@@ -3468,10 +3518,12 @@ canvas.addEventListener('click', (e)=>{
                         audioBadend.play()
                         getCG.delay.push(0)
                         CGArr.push(4)
+                        pushLocalStorage(CGArr);
                     }else{
                         audioGoodend.play()
                         getCG.delay.push(1)
                         CGArr.push(3)
+                        pushLocalStorage(CGArr);
                     }
                     delayObject.talk16A.show = false
                     delayObject.talk16B.show = false
@@ -3495,10 +3547,12 @@ canvas.addEventListener('click', (e)=>{
                         audioBadend.play()
                         getCG.delay.push(0)
                         CGArr.push(4)
+                        pushLocalStorage(CGArr);
                     }else{
                         audioGoodend.play()
                         getCG.delay.push(1)
                         CGArr.push(3)
+                        pushLocalStorage(CGArr);
                     }
                     delayObject.talk16A.show = false
                     delayObject.talk16B.show = false
@@ -3592,6 +3646,7 @@ canvas.addEventListener('click', (e)=>{
                     audioGoodend.play()
                     getCG.delay.push(3)
                     CGArr.push(5)
+                    pushLocalStorage(CGArr);
                     delayObject.isGetCG1 = true
                     delayObject.CG1.enlarge = false
                     delayObject.getCG1.show = true
@@ -3614,6 +3669,7 @@ canvas.addEventListener('click', (e)=>{
                     clickVedioPlay('obj')
                     getCG.delay.push(4)
                     CGArr.push(6)
+                    pushLocalStorage(CGArr);
                     audioGoodend.play()
                     delayObject.isGetCG2 = true
                     delayObject.CG2.enlarge = false
@@ -4020,7 +4076,7 @@ canvas.addEventListener('mouseup', ()=>{
 })
 
 function initCoolRoom(){
-    coolObject.talk1Chk = true
+    coolObject.talk1Chk = true //初始對話 1 狀態
     coolObject.talk2Chk = false
     coolObject.talk3Chk = false
     coolObject.talk4Chk = false
@@ -4054,14 +4110,27 @@ function initCoolRoom(){
     })
 
     CG.cool.isPeace = true
+    //如果 coolObject.people 的圖片包含 'people2' 或 'people3'，將其替換為 'people1
     if(coolObject.people.image.src.includes('people2')){
         coolObject.people.image.src = coolObject.people.image.src.replace('people2', 'people1')
     }else if(coolObject.people.image.src.includes('people3')){
         coolObject.people.image.src = coolObject.people.image.src.replace('people3', 'people1')
     }
+    let ends = [];
+    // 如果 coolObject.end 的圖片包含 'bad'，將其替換為 'good'
     if(coolObject.end.image.src.includes('bad')){
+        ends.push('bad');
         coolObject.end.image.src = coolObject.end.image.src.replace('bad','good')
     }
+
+    // try {
+    //     // 將進度轉換為 JSON 字串並存入 localStorage
+    //     localStorage.setItem('coolGameProgress', JSON.stringify(coolObject));
+    //     console.log('遊戲進度已成功儲存至 localStorage！');
+    // } catch (error) {
+    //     console.error('儲存進度到 localStorage 時發生錯誤:', error);
+    // }
+    
 }
 function initOccupyRoom(){
     occupyObject.sitdownChk = true
@@ -4337,4 +4406,15 @@ function playKnock(){
 function stopKnock(){
     knock.pause();
     knock.currentTime = 0;
+}
+
+function pushLocalStorage(cg){
+    try {
+        // 將進度轉換為 JSON 字串並存入 localStorage
+        localStorage.setItem('cgGameProgress', JSON.stringify(cg));
+        console.log('遊戲進度已成功儲存至 localStorage！');
+    } catch (error) {
+        console.error('儲存進度到 localStorage 時發生錯誤:', error);
+    }
+    
 }
